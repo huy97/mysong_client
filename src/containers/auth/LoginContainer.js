@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from './index.module.scss';
+import styles from './LoginContainer.module.scss';
 import { Formik, Form, FastField } from 'formik';
 import * as Yup from 'yup';
 import ErrorMessage from 'components/Form/ErrorMessage';
+import {Link} from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string().required('Vui lòng nhập tên đăng nhập'),
@@ -25,7 +26,7 @@ export class LoginContainer extends Component {
                     validationSchema={validationSchema}
                     onSubmit={this.handleSubmit}
                     >
-                        <Form>
+                        <Form className={styles.form}>
                             <FastField name="username">
                             {({ field, form, meta }) => (
                                 <input type="text" className="form-input w100p" {...field}/>
@@ -38,7 +39,14 @@ export class LoginContainer extends Component {
                             )}
                             </FastField>
                             <ErrorMessage name="password" />
-                            <button type="submit" className="btn btn-primary mt10">Đăng nhập</button>
+                            <button type="submit" className="btn btn-primary w100p mt10">Đăng nhập</button>
+                            <div className={styles['form-advance']}>
+                                <p className='text-left'>hoặc</p>
+                                <p className='text-right'>
+                                    <Link to={'forgot-password'}>Quên mật khẩu?</Link>
+                                </p>
+                            </div>
+                            <button type="submit" className="btn w100p mt10">Đăng ký tài khoản</button>
                         </Form>
                     </Formik>
                 </div>
@@ -48,7 +56,7 @@ export class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 });
 
 export default connect(mapStateToProps)(LoginContainer)

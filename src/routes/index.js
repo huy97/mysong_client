@@ -4,7 +4,7 @@ import AdminRoute from 'routes/admin';
 import UserRoute from 'routes/user';
 import SplashScreen from 'components/SplashScreen';
 import NotFound from 'components/NotFound';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 export class RouterManager extends React.Component {
     render() {

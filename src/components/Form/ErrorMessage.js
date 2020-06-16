@@ -4,7 +4,7 @@ import {ErrorMessage as ErrMsg} from 'formik';
 const ErrorMessage = (props) => {
     const {className, component} = props;
     return (
-        <ErrMsg className={`error-message ${className}`} component={component ?? 'span'} {...props}/>
+        <ErrMsg {...props} className={`error-message ${className}`} component={component ?? 'span'}/>
     )
 }
 
