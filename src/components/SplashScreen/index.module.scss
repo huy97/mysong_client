@@ -1,0 +1,45 @@
+.splash-screen {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background-color: #ffffff;
+    &__loading{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 50%;
+        left: 50%;
+        background-size: contain;
+        transform-origin: center center;
+        transform: translate(-50%, -50%);
+        &-icon{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin infinite 0.6s linear;
+            background: url("../../assets/loading.svg") no-repeat;
+            background-size: contain;
+            transform-origin: center center;
+        }
+        &-wave {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            background: url("../../assets/wave.svg") no-repeat;
+            background-size: contain;
+            transform: translate(-50%, -50%);
+            }
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(-1turn);
+    }
+  }
+  

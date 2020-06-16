@@ -1,0 +1,21 @@
+.wrapper{
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f8f8f8;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    flex-wrap: wrap;
+    h1{
+        font-weight: bold;
+        margin: 20px;
+        font-size: 120px;
+    }
+    h3{
+        font-weight: normal;
+    }
+}
