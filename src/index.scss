@@ -857,16 +857,57 @@ body {
   padding: 0 20px;
   background-color: #fff;
   cursor: pointer;
-  color: #000000;
-  border: 1px solid #dddddd;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-
+  color: #0190f3;
+  border: 1px solid #0190f3;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   &-primary {
     border: 0;
     color: #ffffff;
     background-color: #0190f3;
+  }
+  &-danger {
+    border: 0;
+    color: #ffffff;
+    background-color: #f31419;
+
+    &-o {
+      border: 1px solid #f31419;
+      color: #f31419;
+      background-color: #ffffff;
+    }
+  }
+  &-success {
+    border: 0;
+    color: #ffffff;
+    background-color: #11C615;
+
+    &-o {
+      border: 1px solid #11C615;
+      color: #11C615;
+      background-color: #ffffff;
+    }
+  }
+  &-facebook {
+    border: 0;
+    color: #ffffff;
+    background-color: #3b5998;
+
+    &-o {
+      border: 1px solid #3b5998;
+      color: #3b5998;
+      background-color: #ffffff;
+    }
+  }
+  &-icon{
+    display: inline-block;
+    line-height: 0;
+    vertical-align: -.125rem;
+  }
+  &-icon + span{
+    display: inline-block;
+    margin-left: 5px;
   }
 }
 
@@ -876,9 +917,9 @@ body {
   line-height: 40px;
   padding: 0 20px;
   border: 1px solid #dddddd;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .error-message {

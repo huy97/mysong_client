@@ -18,19 +18,5 @@
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
-        .form{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-flow: column;
-            .form-advance{
-                width: 100%;
-                display: flex;
-                flex-flow: row;
-                p{
-                    flex: 1;
-                }
-            }
-        }
     }
 }

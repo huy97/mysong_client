@@ -10,7 +10,7 @@ export class RouterManager extends React.Component {
     render() {
         const {isLoggedIn} = this.props;
         return (
-            <Suspense fallback={SplashScreen}>
+            <Suspense fallback={<SplashScreen/>}>
                 <BrowserRouter>
                     <Switch>
                         {[...AdminRoute, ...UserRoute].map((route, key) => {
