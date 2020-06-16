@@ -15,8 +15,4 @@ const mapStateToProps = (state) => ({
     auth: state.authReducer
 });
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+export default connect(mapStateToProps)(HomeContainer)

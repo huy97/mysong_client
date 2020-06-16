@@ -1,10 +1,13 @@
 import React from 'react';
-import { RouterManager } from 'routes';
-
+import LoadingBar from "react-redux-loading-bar";
+import RouterManager from 'routes';
 
 function App() {
   return (
-    <RouterManager/>
+      <React.Fragment>
+          <LoadingBar className={'loading-bar'}/>
+          <RouterManager/>
+      </React.Fragment>
   );
 }
 

@@ -903,7 +903,7 @@ body {
   &-icon{
     display: inline-block;
     line-height: 0;
-    vertical-align: -.125rem;
+    vertical-align: -0.2rem;
   }
   &-icon + span{
     display: inline-block;
@@ -947,4 +947,13 @@ body {
 
 .mt10{
   margin-top: 10px;
+}
+
+
+.loading-bar{
+  position: absolute;
+  height: 2px;
+  top: 0;
+  z-index: 999999;
+  background-color: #f11946;
 }

@@ -1,6 +1,8 @@
 import React, {Component, lazy} from 'react';
 import { connect } from 'react-redux';
 import styles from './LoginContainer.module.scss';
+import {login} from "reducers/auth";
+import {Redirect} from "react-router-dom";
 const Login = lazy(() => import('components/Form/Login'));
 const Register = lazy(() => import('components/Form/Register'));
 
@@ -12,16 +14,21 @@ export class LoginContainer extends Component {
         }
     }
 
-    handleSubmit = (values) => {
-        console.log(values);
+    handleSubmit = ({username, password}) => {
+        this.props.dispatch(login(username, password));
     }
 
     handleLoginFacebook = () => {
-        console.log('Hi')
+
     }
 
     render() {
         const {showLogin} = this.state;
+        const {auth: {isLoggedIn}, history} = this.props;
+        if(isLoggedIn){
+            let returnUrl = new URLSearchParams(history.location.search);
+            return <Redirect to={returnUrl.get('returnUrl') || '/'}/>;
+        }
         return (
             <div className={styles.wrapper}>
                 <div className={styles.login}>
@@ -45,7 +52,8 @@ export class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    auth: state.authReducer
 });
+
 
 export default connect(mapStateToProps)(LoginContainer)

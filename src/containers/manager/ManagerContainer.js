@@ -5,7 +5,7 @@ export class ManagerContainer extends Component {
     render() {
         return (
             <div>
-                
+                Manager
             </div>
         )
     }
@@ -13,10 +13,6 @@ export class ManagerContainer extends Component {
 
 const mapStateToProps = (state) => ({
     
-})
+});
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ManagerContainer)
+export default connect(mapStateToProps)(ManagerContainer)
