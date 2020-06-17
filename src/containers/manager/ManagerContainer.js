@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Can from "containers/ability/Can";
-import {PERMISSION_CODE} from "constants/global";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import 'antd/dist/antd.min.css';
 
 export class ManagerContainer extends Component {
     render() {
         return (
             <div>
-                Manager
+
             </div>
         )
     }

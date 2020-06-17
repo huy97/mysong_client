@@ -1,7 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-class Can extends Component {
+class Can extends React.Component {
+    static propTypes = {
+        roles: PropTypes.array.isRequired
+    }
+
     checkPermission = () => {
         const {roles, auth: {userInfo}} = this.props;
         let valid = false;

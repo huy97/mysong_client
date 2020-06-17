@@ -35,7 +35,8 @@ export const restoreToken = () => {
 
 const inititalState = {
     isLoggedIn: false,
-    userInfo: null,
+    isRestoreToken: true,
+    userInfo: {},
     errors: []
 };
 
@@ -48,6 +49,7 @@ const authReducer = (state = inititalState, action) => {
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             state.isLoggedIn = true;
+            state.isRestoreToken = false;
             state.userInfo = action.payload.userInfo;
             state.errors = [];
             return {
@@ -55,13 +57,13 @@ const authReducer = (state = inititalState, action) => {
             }
         case LOGIN_FAILURE:
             state.isLoggedIn = false;
+            state.isRestoreToken = false;
             state.userInfo = null;
             return {
                 ...state,
                 errors: action.errors
             };
         case RESTORE_TOKEN:
-            state.isLoggedIn = true;
             return {
                 ...state
             };

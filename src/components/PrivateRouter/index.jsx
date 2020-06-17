@@ -23,23 +23,20 @@ class PrivateRouter extends Component {
         return valid;
     }
 
-    componentWillUnmount() {
-        console.log(this.props)
-    }
-
     render() {
         const {path, component, history} = this.props;
-        const token = getUserToken();
         const returnUrl = history.location.pathname;
+        const token = getUserToken();
         if(!token){
             return <Redirect to={`/login?returnUrl=${returnUrl}`} />;
         }
-        if(this.checkRole()){
+        if(!this.checkRole())
             return (
-                <Route exact path={path} component={component}/>
+                <Route exact path={path} component={NotFound}/>
             );
-        }
-        return <NotFound></NotFound>;
+        return (
+            <Route exact path={path} component={component}/>
+        );
     }
 }
 
