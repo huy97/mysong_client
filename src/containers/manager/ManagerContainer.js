@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Can from "containers/ability/Can";
+import {PERMISSION_CODE} from "constants/global";
 
 export class ManagerContainer extends Component {
     render() {
@@ -12,7 +14,7 @@ export class ManagerContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 });
 
 export default connect(mapStateToProps)(ManagerContainer)

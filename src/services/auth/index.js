@@ -1,4 +1,4 @@
-import {LOGIN_URL} from "constants/global";
+import {LOGIN_URL, REGISTER_URL} from "constants/global";
 import services from "services";
 import {GET_USER_INFO_URL} from "constants/global";
 
@@ -6,6 +6,14 @@ export const login = async (username, password) => {
     return await services.post(LOGIN_URL, {
         username,
         password
+    });
+}
+export const register = async (fullName, username, password, confirmPassword) => {
+    return await services.post(REGISTER_URL, {
+        fullName,
+        username,
+        password,
+        confirmPassword
     });
 }
 

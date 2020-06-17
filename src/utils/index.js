@@ -15,5 +15,8 @@ export const removeUserToken = () => {
 export const toast = {
     error: (message, options) => {
         return cogoToast.error(message, {position: 'top-right', hideAfter: 5, ...options});
+    },
+    success: (message, options) => {
+        return cogoToast.success(message, {position: 'top-right', hideAfter: 5, ...options});
     }
 }

@@ -1,6 +1,9 @@
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const REGISTER_START = "REGISTER_START";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const RESTORE_TOKEN = "RESTORE_TOKEN";
 
 export const login = (username, password) => {
     return {
@@ -12,21 +15,56 @@ export const login = (username, password) => {
     }
 }
 
+export const register = (fullName, username, password, confirmPassword) => {
+    return {
+        type: REGISTER_START,
+        payload: {
+            fullName,
+            username,
+            password,
+            confirmPassword
+        }
+    }
+}
+
+export const restoreToken = () => {
+    return {
+        type: RESTORE_TOKEN
+    }
+}
+
 const inititalState = {
     isLoggedIn: false,
-    userInfo: null
+    userInfo: null,
+    errors: []
 };
 
 const authReducer = (state = inititalState, action) => {
     switch(action.type){
+        case REGISTER_START:
+            return state;
         case LOGIN_START:
             return state;
         case LOGIN_SUCCESS:
+        case REGISTER_SUCCESS:
             state.isLoggedIn = true;
             state.userInfo = action.payload.userInfo;
+            state.errors = [];
             return {
                 ...state
             }
+        case LOGIN_FAILURE:
+            state.isLoggedIn = false;
+            state.userInfo = null;
+            return {
+                ...state,
+                errors: action.errors
+            };
+        case RESTORE_TOKEN:
+            state.isLoggedIn = true;
+            return {
+                ...state
+            };
         default:
             return state;
     }

@@ -12,7 +12,7 @@ const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Vui lòng nhập tên hiển thị'),
     username: Yup.string().required('Vui lòng nhập tên đăng nhập'),
     password: Yup.string().required('Vui lòng nhập mật khẩu'),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Hai mật khẩu không giống nhau'),
+    confirmPassword: Yup.string().required('Vui lòng nhập lại mật khẩu').oneOf([Yup.ref('password'), null], 'Hai mật khẩu không giống nhau'),
 });
 
 class Register extends Component {
@@ -23,7 +23,7 @@ class Register extends Component {
     }
 
     render() {
-        const {onSubmit, onShowLogin, onLoginFacebook} = this.props;
+        const { onSubmit, onShowLogin, onLoginFacebook } = this.props;
         return (
             <div>
                 <Formik initialValues={{
@@ -32,8 +32,8 @@ class Register extends Component {
                     password: "",
                     confirmPassword: ""
                 }}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
                 >
                     <Form className={styles.form}>
                         <FastField name="fullName">
