@@ -15,7 +15,7 @@ const validationSchema = Yup.object().shape({
     confirmPassword: Yup.string().required('Vui lòng nhập lại mật khẩu').oneOf([Yup.ref('password'), null], 'Hai mật khẩu không giống nhau'),
 });
 
-class Register extends Component {
+class RegisterForm extends Component {
     static propTypes = {
         onSubmit: PropTypes.func,
         onShowLogin: PropTypes.func,
@@ -79,4 +79,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default RegisterForm;

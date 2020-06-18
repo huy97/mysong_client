@@ -1,16 +1,12 @@
 import React from 'react';
+// import {PERMISSION_CODE} from "constants/global";
 
-const HomeContainer = React.lazy(() => import('containers/home/HomeContainer'));
-const LoginContainer = React.lazy(() => import('containers/auth/LoginContainer'));
+const Login = React.lazy(() => import('containers/Login'));
 
 const routes = [
     {
-        path: "/",
-        component: HomeContainer
-    },
-    {
-        path: "/login",
-        component: LoginContainer
+        path: "/abc",
+        component: Login
     }
 ];
 

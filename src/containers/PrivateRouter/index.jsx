@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import {Redirect, Route, withRouter} from "react-router-dom";
 import {getUserToken} from "utils";
-import NotFound from "components/NotFound";
+import NotFound from "containers/NotFound";
 
 class PrivateRouter extends Component {
 
-    checkRole = () => {
+    checkPermission = () => {
         const {roles, auth: {userInfo}} = this.props;
         let valid = false;
         if(roles && roles.length){
@@ -30,7 +30,7 @@ class PrivateRouter extends Component {
         if(!token){
             return <Redirect to={`/login?returnUrl=${returnUrl}`} />;
         }
-        if(!this.checkRole())
+        if(!this.checkPermission())
             return (
                 <Route exact path={path} component={NotFound}/>
             );

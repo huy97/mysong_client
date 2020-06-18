@@ -84,6 +84,8 @@
       <workItem from="1592323181816" duration="10449000" />
       <workItem from="1592374443692" duration="12012000" />
       <workItem from="1592398514356" duration="5906000" />
+      <workItem from="1592443606139" duration="2894000" />
+      <workItem from="1592448432290" duration="569000" />
     </task>
     <servers />
   </component>
@@ -107,34 +109,35 @@
       <screen x="0" y="23" width="1920" height="984" />
     </state>
     <state x="708" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592326506468" />
-    <state width="1899" height="266" key="GridCell.Tab.0.bottom" timestamp="1592404469022">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state width="1659" height="200" key="GridCell.Tab.0.bottom" timestamp="1592446709857">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
-    <state width="1659" height="200" key="GridCell.Tab.0.bottom/0.23.1680.959@0.23.1680.959" timestamp="1592389787654" />
+    <state width="1659" height="200" key="GridCell.Tab.0.bottom/0.23.1680.959@0.23.1680.959" timestamp="1592446709857" />
     <state width="1899" height="266" key="GridCell.Tab.0.bottom/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592404469022" />
-    <state width="1899" height="266" key="GridCell.Tab.0.center" timestamp="1592404469022">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state width="1659" height="200" key="GridCell.Tab.0.center" timestamp="1592446709856">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
-    <state width="1659" height="200" key="GridCell.Tab.0.center/0.23.1680.959@0.23.1680.959" timestamp="1592389787653" />
+    <state width="1659" height="200" key="GridCell.Tab.0.center/0.23.1680.959@0.23.1680.959" timestamp="1592446709856" />
     <state width="1899" height="266" key="GridCell.Tab.0.center/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592404469022" />
-    <state width="1899" height="266" key="GridCell.Tab.0.left" timestamp="1592404469021">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state width="1659" height="200" key="GridCell.Tab.0.left" timestamp="1592446709855">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
-    <state width="1659" height="200" key="GridCell.Tab.0.left/0.23.1680.959@0.23.1680.959" timestamp="1592389787653" />
+    <state width="1659" height="200" key="GridCell.Tab.0.left/0.23.1680.959@0.23.1680.959" timestamp="1592446709855" />
     <state width="1899" height="266" key="GridCell.Tab.0.left/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592404469021" />
-    <state width="1899" height="266" key="GridCell.Tab.0.right" timestamp="1592404469022">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state width="1659" height="200" key="GridCell.Tab.0.right" timestamp="1592446709856">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
-    <state width="1659" height="200" key="GridCell.Tab.0.right/0.23.1680.959@0.23.1680.959" timestamp="1592389787653" />
+    <state width="1659" height="200" key="GridCell.Tab.0.right/0.23.1680.959@0.23.1680.959" timestamp="1592446709856" />
     <state width="1899" height="266" key="GridCell.Tab.0.right/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592404469022" />
-    <state x="469" y="154" key="SettingsEditor" timestamp="1592332345712">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state x="410" y="151" key="SettingsEditor" timestamp="1592446228882">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
+    <state x="410" y="151" key="SettingsEditor/0.23.1680.959@0.23.1680.959" timestamp="1592446228882" />
     <state x="469" y="154" key="SettingsEditor/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592332345712" />
-    <state width="686" height="452" key="javadoc.popup" timestamp="1592405019211">
-      <screen x="0" y="23" width="1920" height="984" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1592444630073">
+      <screen x="0" y="23" width="1680" height="959" />
     </state>
-    <state width="600" height="440" key="javadoc.popup/0.23.1680.959@0.23.1680.959" timestamp="1592386584999" />
+    <state width="600" height="440" key="javadoc.popup/0.23.1680.959@0.23.1680.959" timestamp="1592444630073" />
     <state width="686" height="452" key="javadoc.popup/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592405019211" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1592376111149">
       <screen x="0" y="23" width="1680" height="959" />

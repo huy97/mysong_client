@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import LoadingBar from "react-redux-loading-bar";
-import RouterManager from 'routes';
 import {connect} from "react-redux";
 import {getUserToken} from "utils";
 import {LOGIN_FAILURE, restoreToken} from "reducers/auth";
-import SplashScreen from "./components/SplashScreen";
+import SplashScreen from "containers/SplashScreen";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Home from 'containers/Home';
+import Manager from 'containers/Manager';
+import Login from 'containers/Login';
+import NotFound from 'containers/NotFound';
 
 class App extends React.Component{
 
@@ -23,7 +27,15 @@ class App extends React.Component{
         return (
             <React.Fragment>
                 <LoadingBar className="loading-bar"/>
-                {isRestoreToken ? <SplashScreen/> : <RouterManager/>}
+                {isRestoreToken ? 
+                    <SplashScreen/> :
+                    <Suspense fallback={<SplashScreen/>}>
+                        <Router>
+                            <Switch>
+                            </Switch>
+                        </Router>
+                    </Suspense>
+                }
             </React.Fragment>
         );
     }

@@ -1,26 +1,20 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AdminRoute from 'routes/admin';
-import UserRoute from 'routes/user';
-import SplashScreen from 'components/SplashScreen';
-import NotFound from 'components/NotFound';
-import PrivateRouter from "components/PrivateRouter";
+import React from 'react';
+import PrivateRouter from "containers/PrivateRouter";
+import { Route, Switch } from 'react-router-dom';
 
-const RouterManager = () => {
+const RouterManager = (props) => {
+    const {routes} = props;
     return (
-        <Suspense fallback={<SplashScreen/>}>
-            <BrowserRouter>
-                <Switch>
-                    {[...AdminRoute, ...UserRoute].map((route, key) => {
-                        if(route.auth){
-                            return <PrivateRouter key={key} roles={route.roles} path={route.path} component={route.component} />;
-                        }
-                        return <Route key={key} exact path={route.path} component={route.component}/>;
-                    })}
-                    <Route component={NotFound}/>
-                </Switch>
-            </BrowserRouter>
-        </Suspense>
+        <Switch>
+            {
+                routes.map((route, key) => {
+                    if(route.auth){
+                        return <PrivateRouter roles={route.roles} path={route.path} component={route.component} />;
+                    }
+                    return <Route path={route.path} component={route.component}/>;
+                })
+            }
+        </Switch>
     )
 }
 

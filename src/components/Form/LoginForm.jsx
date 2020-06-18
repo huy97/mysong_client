@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required('Vui lòng nhập mật khẩu')
 });
 
-class Login extends Component {
+class LoginForm extends Component {
     static propTypes = {
         onSubmit: PropTypes.func,
         onShowRegister: PropTypes.func,
@@ -34,13 +34,13 @@ class Login extends Component {
                     <Form className={styles.form}>
                         <FastField name="username">
                             {({ field, form, meta }) => (
-                                <input type="text" className="form-input w100p" {...field}/>
+                                <input type="text" placeholder="Tên đăng nhập" className="form-input w100p" {...field}/>
                             )}
                         </FastField>
                         <ErrorMessage className="w100p" name="username" />
                         <FastField name="password">
                             {({ field, form, meta }) => (
-                                <input type="password" className="form-input w100p mt10" {...field}/>
+                                <input type="password" placeholder="Mật khẩu" className="form-input w100p mt10" {...field}/>
                             )}
                         </FastField>
                         <ErrorMessage className="w100p" name="password" />
@@ -63,4 +63,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default LoginForm;

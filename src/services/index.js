@@ -23,8 +23,12 @@ instance.interceptors.response.use(function (response) {
     return response.data;
 }, function (error) {
     store.dispatch(hideLoading());
-    console.log("Error resp: ", error.response.data);
-    return Promise.reject(error.response.data);
+    if(error.response){
+        console.log("Error resp: ", error.response.data);
+        return Promise.reject(error.response.data);
+    }
+    console.log("Error resp: ", error);
+    return Promise.reject(error);
 });
 
 

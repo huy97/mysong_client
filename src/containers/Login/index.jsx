@@ -1,12 +1,13 @@
 import React, {Component, lazy} from 'react';
 import { connect } from 'react-redux';
-import styles from './LoginContainer.module.scss';
+import styles from './Login.module.scss';
 import {login, register} from "reducers/auth";
 import {Redirect} from "react-router-dom";
-const Login = lazy(() => import('components/Form/Login'));
-const Register = lazy(() => import('components/Form/Register'));
 
-export class LoginContainer extends Component {
+const LoginForm = lazy(() => import('components/Form/LoginForm'));
+const RegisterForm = lazy(() => import('components/Form/RegisterForm'));
+
+export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,12 +51,12 @@ export class LoginContainer extends Component {
                 <div className={styles.login}>
                     {
                         showLogin ?
-                            <Login
+                            <LoginForm
                                 onSubmit={this.handleSubmitLogin}
                                 onShowRegister={() => this.setState({showLogin: false})}
                                 onLoginFacebook={this.handleLoginFacebook}
                             /> :
-                            <Register
+                            <RegisterForm
                                 ref={(el) => this.registerRef = el}
                                 onSubmit={this.handleSubmitRegister}
                                 onShowLogin={() => this.setState({showLogin: true})}
@@ -73,4 +74,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps)(LoginContainer)
+export default connect(mapStateToProps)(Login)
