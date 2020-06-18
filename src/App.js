@@ -4,11 +4,8 @@ import {connect} from "react-redux";
 import {getUserToken} from "utils";
 import {LOGIN_FAILURE, restoreToken} from "reducers/auth";
 import SplashScreen from "containers/SplashScreen";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import Home from 'containers/Home';
-import Manager from 'containers/Manager';
-import Login from 'containers/Login';
-import NotFound from 'containers/NotFound';
+import {BrowserRouter as Router} from "react-router-dom";
+import RouterManager from 'routes';
 
 class App extends React.Component{
 
@@ -31,8 +28,7 @@ class App extends React.Component{
                     <SplashScreen/> :
                     <Suspense fallback={<SplashScreen/>}>
                         <Router>
-                            <Switch>
-                            </Switch>
+                            <RouterManager/>
                         </Router>
                     </Suspense>
                 }
