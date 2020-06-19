@@ -1,20 +1,33 @@
 import React from 'react';
-import PrivateRouter from "containers/PrivateRouter";
 import { Route, Switch } from 'react-router-dom';
-import NotFound from 'containers/NotFound';
-import routes from 'routes/web';
+import adminRoutes from 'routes/admin';
+import userRoutes from 'routes/user';
+
+const Home = React.lazy(() => import('containers/Home'));
+const Login = React.lazy(() => import('containers/Login'));
+const Content = React.lazy(() => import('containers/Content'));
+const NotFound = React.lazy(() => import('containers/NotFound'));
 
 const RouterManager = (props) => {
     return (
         <Switch>
+            <Route exact path="/">
+                <Content>
+                    <Home/>
+                </Content>
+            </Route>
             {
-                routes.map((route, key) => {
-                    if(route.auth){
-                        return <PrivateRouter roles={route.roles} path={route.path} component={route.component} />;
-                    }
-                    return <Route exact path={route.path} component={route.component}/>;
+                [...adminRoutes, ...userRoutes].map(({component: Component, isPrivate, roles, path, isAdmin}, key) => {
+                    return (
+                        <Route exact path={path}>
+                            <Content isPrivate={isPrivate} isAdmin={isAdmin} roles={roles}>
+                                <Component/>
+                            </Content>
+                        </Route>
+                    )
                 })
             }
+            <Route path="/login" component={Login} />
             <Route component={NotFound} />
         </Switch>
     )

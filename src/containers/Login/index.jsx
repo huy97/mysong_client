@@ -2,7 +2,7 @@ import React, {Component, lazy} from 'react';
 import { connect } from 'react-redux';
 import styles from './Login.module.scss';
 import {login, register} from "reducers/auth";
-import {Redirect} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 
 const LoginForm = lazy(() => import('components/Form/LoginForm'));
 const RegisterForm = lazy(() => import('components/Form/RegisterForm'));
@@ -51,17 +51,17 @@ export class Login extends Component {
                 <div className={styles.login}>
                     {
                         showLogin ?
-                            <LoginForm
-                                onSubmit={this.handleSubmitLogin}
-                                onShowRegister={() => this.setState({showLogin: false})}
-                                onLoginFacebook={this.handleLoginFacebook}
-                            /> :
-                            <RegisterForm
-                                ref={(el) => this.registerRef = el}
-                                onSubmit={this.handleSubmitRegister}
-                                onShowLogin={() => this.setState({showLogin: true})}
-                                onLoginFacebook={this.handleLoginFacebook}
-                            />
+                        <LoginForm
+                            onSubmit={this.handleSubmitLogin}
+                            onShowRegister={() => this.setState({showLogin: false})}
+                            onLoginFacebook={this.handleLoginFacebook}
+                        /> :
+                        <RegisterForm
+                            ref={(el) => this.registerRef = el}
+                            onSubmit={this.handleSubmitRegister}
+                            onShowLogin={() => this.setState({showLogin: true})}
+                            onLoginFacebook={this.handleLoginFacebook}
+                        />
                     }
                 </div>
             </div>
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login));

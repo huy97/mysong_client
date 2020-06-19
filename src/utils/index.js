@@ -20,3 +20,14 @@ export const toast = {
         return cogoToast.success(message, {position: 'top-right', hideAfter: 5, ...options});
     }
 }
+
+export const checkRole = (userPermissions = [], routePermissions = []) => {
+    let valid = false;
+    routePermissions.forEach((permission) => {
+        if(userPermissions.includes(permission)){
+            valid = true;
+            return false;
+        }
+    });
+    return valid;
+}
