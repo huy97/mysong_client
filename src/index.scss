@@ -933,6 +933,12 @@ body {
 
 // End form
 
+.menu-icon{
+  font-size: 16px;
+  margin-right: 5px;
+  vertical-align: -0.2rem;
+}
+
 .text-right{
   text-align: right;
 }
@@ -961,3 +967,26 @@ body {
   z-index: 999999;
   background-color: #f11946;
 }
+
+///Override antd
+.ant-upload-list-item-name{
+  font-weight: 500;
+}
+.ant-form-item{
+  margin-bottom: 10px !important;
+}
+
+.anticon-spin{
+  width: inherit;
+  height: inherit;
+}
+.anticon svg{
+  font-size: inherit;
+}
+.category-upload {
+  .ant-upload-select-picture-card{
+    width: 100% !important;
+    margin: 0;
+  }
+}
+//End override

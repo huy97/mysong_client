@@ -20,6 +20,12 @@ class LoginForm extends Component {
         onLoginFacebook: PropTypes.func
     }
 
+    static defaultProps = {
+        onSubmit: () => {},
+        onShowRegister: () => {},
+        onLoginFacebook: () => {}
+    }
+
     render() {
         const {onSubmit, onShowRegister, onLoginFacebook} = this.props;
         return (

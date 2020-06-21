@@ -5,13 +5,18 @@ import PropTypes from 'prop-types';
 const ErrorMessage = (props) => {
     const {className, component} = props;
     return (
-        <ErrMsg {...props} className={`error-message ${className}`} component={component ?? 'span'}/>
+        <ErrMsg {...props} className={`error-message ${className}`} component={component}/>
     )
 }
 
 ErrorMessage.propTypes = {
     className: PropTypes.string,
-    component: PropTypes.object
+    component: PropTypes.any
+}
+
+ErrorMessage.defaultProps = {
+    className: "",
+    component: "span"
 }
 
 export default ErrorMessage;

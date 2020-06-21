@@ -22,6 +22,12 @@ class RegisterForm extends Component {
         onLoginFacebook: PropTypes.func
     }
 
+    static defaultProps = {
+        onSubmit: () => {},
+        onShowLogin: () => {},
+        onLoginFacebook: () => {}
+    }
+
     render() {
         const { onSubmit, onShowLogin, onLoginFacebook } = this.props;
         return (

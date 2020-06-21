@@ -1,4 +1,5 @@
 import cogoToast from "cogo-toast";
+import {CDN_URL} from "constants/global";
 
 export const getUserToken = () => {
     return localStorage.getItem('token');
@@ -10,6 +11,14 @@ export const setUserToken = (token) => {
 
 export const removeUserToken = () => {
     localStorage.removeItem('token');
+}
+
+export const getSkip = (currentPage, pageSize) => {
+    return (currentPage - 1) * pageSize;
+}
+
+export const getCDN = (url) => {
+    return CDN_URL + url;
 }
 
 export const toast = {

@@ -19,7 +19,7 @@ const RouterManager = (props) => {
             {
                 [...adminRoutes, ...userRoutes].map(({component: Component, isPrivate, roles, path, isAdmin}, key) => {
                     return (
-                        <Route exact path={path}>
+                        <Route key={key} exact path={path}>
                             <Content isPrivate={isPrivate} isAdmin={isAdmin} roles={roles}>
                                 <Component/>
                             </Content>

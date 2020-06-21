@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Login.module.scss';
 import {login, register} from "reducers/auth";
 import {Redirect, withRouter} from "react-router-dom";
+import { get } from 'lodash';
 
 const LoginForm = lazy(() => import('components/Form/LoginForm'));
 const RegisterForm = lazy(() => import('components/Form/RegisterForm'));
@@ -43,7 +44,7 @@ export class Login extends Component {
         const {showLogin} = this.state;
         const {auth: {isLoggedIn}, history} = this.props;
         if(isLoggedIn){
-            let returnUrl = new URLSearchParams(history.location.search);
+            let returnUrl = new URLSearchParams(get(history, 'location.pathname', ""));
             return <Redirect to={returnUrl.get('returnUrl') || '/'}/>;
         }
         return (

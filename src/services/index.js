@@ -12,6 +12,7 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
     store.dispatch(showLoading());
     config.headers.common['Authorization'] = localStorage.getItem('token');
+    console.log("Request: ", config.url, config.method, config.params || [], config.data || []);
     return config;
 }, function (error) {
     store.dispatch(hideLoading());
@@ -19,15 +20,15 @@ instance.interceptors.request.use(function (config) {
 });
 instance.interceptors.response.use(function (response) {
     store.dispatch(hideLoading());
-    console.log("Response: ", response.data);
+    console.log("Response: ", response.config.url, response.data);
     return response.data;
 }, function (error) {
     store.dispatch(hideLoading());
     if(error.response){
-        console.log("Error resp: ", error.response.data);
+        console.log("Error:", error.response.config.url, error.response.data);
         return Promise.reject(error.response.data);
     }
-    console.log("Error resp: ", error);
+    console.log("Error: ", error);
     return Promise.reject(error);
 });
 

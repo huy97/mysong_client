@@ -2,14 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3aa9dc32-5639-41b9-9422-f81c71fb1a01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Manager/Dashboard/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PrivateRouter/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrivateRouter/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ability/Can.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ability/Can.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/manager/ManagerContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/manager/ManagerContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/auth/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form/ErrorMessage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form/ErrorMessage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form/RegisterForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Manager/Dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Manager/Dashboard/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Content/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Content/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Home/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Manager/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Manager/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ability/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ability/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/user/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,6 +96,7 @@
       <workItem from="1592398514356" duration="5906000" />
       <workItem from="1592443606139" duration="2894000" />
       <workItem from="1592448432290" duration="569000" />
+      <workItem from="1592752477684" duration="101000" />
     </task>
     <servers />
   </component>
@@ -134,11 +145,11 @@
     </state>
     <state x="410" y="151" key="SettingsEditor/0.23.1680.959@0.23.1680.959" timestamp="1592446228882" />
     <state x="469" y="154" key="SettingsEditor/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592332345712" />
-    <state width="600" height="440" key="javadoc.popup" timestamp="1592444630073">
-      <screen x="0" y="23" width="1680" height="959" />
+    <state width="686" height="452" key="javadoc.popup" timestamp="1592752511253">
+      <screen x="0" y="23" width="1920" height="984" />
     </state>
     <state width="600" height="440" key="javadoc.popup/0.23.1680.959@0.23.1680.959" timestamp="1592444630073" />
-    <state width="686" height="452" key="javadoc.popup/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592405019211" />
+    <state width="686" height="452" key="javadoc.popup/0.23.1920.984/1920.23.1920.1057@0.23.1920.984" timestamp="1592752511253" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1592376111149">
       <screen x="0" y="23" width="1680" height="959" />
     </state>

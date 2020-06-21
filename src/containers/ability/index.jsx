@@ -8,6 +8,10 @@ class Can extends React.Component {
         roles: PropTypes.array.isRequired
     }
 
+    static defaultProps = {
+        roles: []
+    }
+
     render() {
         const {roles, auth: {userInfo}, children} = this.props;
         if(checkRole(roles, userInfo.permissions))
