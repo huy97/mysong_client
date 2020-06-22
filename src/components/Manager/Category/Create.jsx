@@ -83,7 +83,7 @@ export default class Create extends Component {
     }
 
     handleClose = () => {
-        this.setState({thumbnail: "", cover: ""});
+        this.setState({thumbnail: "", cover: "", thumbnailData: "", coverData: ""});
         this.props.onClose();
     }
 
@@ -123,7 +123,6 @@ export default class Create extends Component {
                     <Form
                         ref={(el) => this.form = el}
                         fields={[]}
-                        hideRequiredMark={true}
                         initialValues={{
                             title: "",
                             description: ""

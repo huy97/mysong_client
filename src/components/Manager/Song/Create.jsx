@@ -235,7 +235,6 @@ export default class Create extends Component {
                                         ref={(el) => this.form = el}
                                         onFinish={this.handleSubmit}
                                         layout="vertical"
-                                        hideRequiredMark="hideRequiredMark"
                                         initialValues={{
                                             title: "",
                                             isOfficial: false,

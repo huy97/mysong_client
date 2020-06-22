@@ -87,7 +87,7 @@ export default class Edit extends Component {
     }
 
     handleClose = () => {
-        this.setState({thumbnail: "", cover: ""});
+        this.setState({thumbnail: "", cover: "", thumbnailData: "", coverData: ""});
         this.props.onClose();
     }
 
@@ -121,8 +121,6 @@ export default class Edit extends Component {
                 return fields.push({name: [key], value: initData[key]});
             });
             this.setState({
-                title: snapshot.editData.title,
-                description: snapshot.editData.description,
                 thumbnail: snapshot.editData.thumbnail,
                 thumbnailData: getCDN(snapshot.editData.thumbnail),
                 cover: snapshot.editData.cover,
@@ -156,7 +154,6 @@ export default class Edit extends Component {
                     <Form
                         ref={(el) => this.form = el}
                         fields={fields}
-                        hideRequiredMark={true}
                         initialValues={{
                             title: "",
                             description: ""

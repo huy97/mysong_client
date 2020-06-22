@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Table, Button, Popconfirm} from 'antd';
+import {Table, Button, Popconfirm, Tag} from 'antd';
 import PropTypes from 'prop-types';
 import { FiTrash, FiEdit3 } from 'react-icons/fi';
 import { getCDN } from 'utils';
@@ -34,29 +34,20 @@ export default class ListSong extends Component {
         const {data, onSelect, onSelectAll, onPaginate, pagination, onDelete, onEdit} = this.props;
         const columns = [
             {
-                title: 'ID',
-                dataIndex: 'shortCode',
+                title: 'Username',
+                dataIndex: 'username',
                 width: 120,
                 fixed: "left"
             },
             {
-                title: 'Tên thể loại',
-                dataIndex: 'title',
-                render: (text, record) => <a href={record.link}>{text}</a>
-            },
-            {
-                title: 'Mô tả',
-                dataIndex: 'description'
+                title: 'Tên hiển thị',
+                dataIndex: 'fullName',
+                render: (text, record) => <b>{text}</b>
             },
             {
                 title: 'Ảnh đại diện',
-                dataIndex: 'thumbnail',
-                render: (thumbnail, record) => <img width="50" height="50" alt="Ảnh bìa" src={getCDN(thumbnail)} />
-            },
-            {
-                title: 'Ảnh bìa',
-                dataIndex: 'cover',
-                render: (cover, record) => <img width="50" height="50" alt="Ảnh bìa" src={getCDN(cover)} />
+                dataIndex: 'avatar',
+                render: (thumbnail, record) => <img width="50" height="50" alt="Ảnh đại diện" src={getCDN(thumbnail)} />
             },
             {
                 title: 'Ngày tạo',
@@ -64,9 +55,14 @@ export default class ListSong extends Component {
                 render: (time) => moment(time).format('DD/MM/YYYY HH:mm')
             },
             {
-                title: 'Ngày cập nhật',
-                dataIndex: 'updatedAt',
-                render: (time) => moment(time).format('DD/MM/YYYY HH:mm')
+                title: 'Loại tài khoản',
+                dataIndex: 'isVip',
+                render: (value, record) => value ? <Tag color="red" key={1}><b>VIP</b></Tag> : <Tag key={1}>Thường</Tag>
+            },
+            {
+                title: 'Ngày hết hạn VIP',
+                dataIndex: 'vipExpiredTime',
+                render: (time, record) => record.isVip && time ? moment(time).format('DD/MM/YYYY HH:mm') : ""
             },
             {
                 title: 'Hành động',
@@ -89,7 +85,6 @@ export default class ListSong extends Component {
         return (
             <Table
                 size="small"
-                scroll={{x: "100vw"}}
                 rowSelection={{
                     type: "checkbox",
                     onSelect: onSelect,

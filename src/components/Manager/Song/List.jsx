@@ -148,6 +148,7 @@ export default class ListSong extends Component {
                 }}
                 pagination={{
                     ...pagination,
+                    size: "default",
                     showTotal: (total, range) => <span>Tổng: {total}</span>,
                     onChange: onPaginate
                 }}

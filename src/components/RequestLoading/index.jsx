@@ -5,10 +5,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 export class RequestLoading extends Component {
     render() {
-        const {loadingBar} = this.props;
+        const {loadingBar, style} = this.props;
         if(loadingBar.default)
             return (
-                <Spin style={{position: "fixed", right: 10, top: 74}} indicator={<LoadingOutlined style={{fontSize: 20, color: "#f11946"}}/>}></Spin>
+                <Spin style={{position: "fixed", right: 10, top: 74, ...style}} indicator={<LoadingOutlined style={{fontSize: 20, color: "#f11946"}}/>}></Spin>
             )
         return null;
     }

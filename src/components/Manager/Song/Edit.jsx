@@ -266,7 +266,6 @@ export default class Edit extends Component {
                             ref={(el) => this.form = el}
                             onFinish={this.handleSubmit}
                             layout="vertical"
-                            hideRequiredMark="hideRequiredMark"
                             fields={fields}
                             style={{
                                 flex: 1,

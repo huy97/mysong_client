@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Drawer, Form, Input, Upload, Button, notification, Checkbox} from 'antd';
+import {Drawer, Form, Input, Upload, Button, notification, Checkbox, DatePicker} from 'antd';
 import { FiUpload } from 'react-icons/fi';
 import { uploadMedia } from 'services/media';
+import locale from 'antd/es/date-picker/locale/vi_VN';
+import { updateUser } from 'services/auth';
 import { getCDN } from 'utils';
-import { updateArtist } from 'services/artist';
+import moment from 'moment';
 
-export default class Edit extends Component {
+export default class Create extends Component {
     static propTypes = {
         visible: PropTypes.bool.isRequired,
-        editData: PropTypes.object.isRequired,
         onSuccess: PropTypes.func,
         onClose: PropTypes.func
     }
 
     static defaultProps = {
         visible: false,
-        editData: {},
         onSuccess: () => {},
         onClose: () => {}
     }
@@ -24,15 +24,13 @@ export default class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            thumbnail: "",
-            thumbnailData: "",
-            cover: "",
-            coverData: "",
+            avatar: "",
+            avatarData: "",
             fields: []
         }
     }
 
-    handleUpload = async ({file, onSuccess, onError, onProgress}, type = 1) => {
+    handleUpload = async ({file, onSuccess, onError, onProgress}) => {
         try{
             const result = await uploadMedia(file, (e) => {
                 onProgress({
@@ -41,11 +39,7 @@ export default class Edit extends Component {
             });
             let frd = new FileReader();
             frd.onload = ({target}) => {
-                if(type === 1){
-                    this.setState({thumbnailData: target.result, thumbnail: result.data.minimizePath});
-                }else{
-                    this.setState({coverData: target.result, cover: result.data.filePath});
-                }
+                this.setState({avatarData: target.result, avatar: result.data.minimizePath});
             }
             frd.readAsDataURL(file);
         }catch(e){
@@ -53,15 +47,11 @@ export default class Edit extends Component {
         }
     }
 
-    handleSubmit = async ({fullName, isComposer}) => {
-        const {thumbnail, cover} = this.state;
+    handleSubmit = async ({fullName, newPassword, isVip, vipExpiredTime}) => {
+        const {avatar} = this.state;
         const {onSuccess, editData} = this.props;
         try{
-            if (!cover) {
-                notification.error({message: "Vui lòng tải lên ảnh bìa!"});
-                return;
-            }
-            if (!thumbnail) {
+            if (!avatar) {
                 notification.error({message: "Vui lòng tải lên ảnh đại diện!"});
                 return;
             }
@@ -69,25 +59,29 @@ export default class Edit extends Component {
                 this.form.submit();
                 return;
             }
-            let data = {
-                fullName,
-                isComposer,
-                thumbnail,
-                cover
-            };
-            const result = await updateArtist(editData._id, data);
+            const result = await updateUser(editData._id, fullName, avatar, isVip, vipExpiredTime && vipExpiredTime.hours(23).minutes(59).seconds(59).utc(), newPassword);
             notification.success({
-                message: "Cập nhật nghệ sĩ thành công"
+                message: "Cập nhật người dùng thành công"
             });
             onSuccess(result.data);
             this.handleClose();
         }catch(e){
+            if(e.errors && e.errors.length){
+                let fields = e.errors.map((obj) => {
+                    return {
+                        name: [obj.param],
+                        value: obj.value,
+                        errors: [obj.msg]
+                    }
+                });
+                this.form.setFields(fields);
+            }
             notification.error({message: e.message});
         }
     }
 
     handleClose = () => {
-        this.setState({thumbnail: "", cover: "", thumbnailData: "", coverData: ""});
+        this.setState({avatar: "", avatarData: ""});
         this.props.onClose();
     }
 
@@ -104,7 +98,7 @@ export default class Edit extends Component {
                     Đóng
                 </Button>
                 <Button onClick={this.handleSubmit} type="primary">
-                    Lưu thay đổi
+                    Lưu thông tin
                 </Button>
             </div>
         )
@@ -115,16 +109,16 @@ export default class Edit extends Component {
             let fields = [];
             let initData = {
                 fullName: snapshot.editData.fullName,
-                isComposer: snapshot.editData.isComposer,
+                username: snapshot.editData.username,
+                isVip: snapshot.editData.isVip,
+                vipExpiredTime: moment(snapshot.editData.vipExpiredTime),
             }
             Object.keys(initData).map((key) => {
                 return fields.push({name: [key], value: initData[key]});
             });
             this.setState({
-                thumbnail: snapshot.editData.thumbnail,
-                thumbnailData: getCDN(snapshot.editData.thumbnail),
-                cover: snapshot.editData.cover,
-                coverData: getCDN(snapshot.editData.cover),
+                avatar: snapshot.editData.avatar,
+                avatarData: getCDN(snapshot.editData.avatar),
                 fields: fields
             });
         }
@@ -138,12 +132,12 @@ export default class Edit extends Component {
     }
 
     render() {
-        const {thumbnailData, coverData, fields} = this.state;
+        const {avatarData, fields} = this.state;
         const {visible} = this.props;
         return (
             <div>
                 <Drawer
-                    title="Sửa nghệ sĩ"
+                    title="Sửa người dùng"
                     placement="right"
                     width={500}
                     closable={true}
@@ -154,45 +148,20 @@ export default class Edit extends Component {
                     <Form
                         ref={(el) => this.form = el}
                         fields={fields}
-                        initialValues={{
-                            fullName: "",
-                            isComposer: false
-                        }}
                         onFinish={this.handleSubmit}
                         layout="vertical">
-                        <Form.Item label="Ảnh bìa">
-                            <Upload
-                                name="cover"
-                                accept="image/*"
-                                listType="picture-card"
-                                className="category-upload"
-                                showUploadList={false}
-                                customRequest={(e) => this.handleUpload(e, 0)}>
-                                {
-                                    coverData
-                                        ? <img
-                                                src={coverData}
-                                                alt="Ảnh bìa"
-                                                style={{
-                                                    width: '100%',
-                                                    height: 250
-                                                }}/>
-                                        : <FiUpload style={{fontSize: 24}}/>
-                                }
-                            </Upload>
-                        </Form.Item>
                         <Form.Item label="Ảnh đại diện">
                             <Upload
-                                name="thumbnail"
+                                name="avatar"
                                 accept="image/*"
                                 listType="picture-card"
                                 className="category-upload"
                                 showUploadList={false}
-                                customRequest={(e) => this.handleUpload(e, 1)}>
+                                customRequest={this.handleUpload}>
                                 {
-                                    thumbnailData
+                                    avatarData
                                         ? <img
-                                                src={thumbnailData}
+                                                src={avatarData}
                                                 alt="Ảnh đại diện"
                                                 style={{
                                                     width: 150,
@@ -204,16 +173,34 @@ export default class Edit extends Component {
                         </Form.Item>
                         <Form.Item
                             name="fullName"
-                            label="Tên nghệ sĩ"
+                            label="Tên hiển thị"
                             rules={[{
                                     required: true,
-                                    message: "Vui lòng nhập tên nghệ sĩ"
+                                    message: "Vui lòng nhập tên hiển thị"
                                 }
                             ]}>
-                            <Input placeholder="Nhập tên nghệ sĩ"/>
+                            <Input placeholder="Nhập tên hiển thị"/>
                         </Form.Item>
-                        <Form.Item name="isComposer" valuePropName="checked">
-                            <Checkbox>Ca sĩ - Nhạc sĩ</Checkbox>
+                        <Form.Item
+                            name="username"
+                            label="Tên đăng nhập"
+                            rules={[{
+                                    required: true,
+                                    message: "Vui lòng nhập tên đăng nhập"
+                                }
+                            ]}>
+                            <Input disabled placeholder="Nhập tên đăng nhập"/>
+                        </Form.Item>
+                        <Form.Item
+                            name="newPassword"
+                            label="Mật khẩu mới">
+                            <Input type="newPassword" placeholder="Nhập mật khẩu mới"/>
+                        </Form.Item>
+                        <Form.Item name="isVip" valuePropName="checked">
+                            <Checkbox>VIP</Checkbox>
+                        </Form.Item>
+                        <Form.Item name="vipExpiredTime" label="Ngày hết hạn VIP">
+                            <DatePicker locale={locale} placeholder="Chọn ngày" format="DD/MM/YYYY" style={{display: "block"}}/>
                         </Form.Item>
                     </Form>
                 </Drawer>

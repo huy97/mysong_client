@@ -934,9 +934,9 @@ body {
 // End form
 
 .menu-icon{
-  font-size: 16px;
+  font-size: 18px;
   margin-right: 5px;
-  vertical-align: -0.2rem;
+  vertical-align: -0.25rem;
 }
 
 .text-right{
@@ -988,5 +988,11 @@ body {
     width: 100% !important;
     margin: 0;
   }
+}
+
+.ant-form-item-label > label.ant-form-item-required::before{
+  position: absolute;
+  margin-right: 0 !important;
+  right: -10px;
 }
 //End override

@@ -171,10 +171,14 @@ export default class Song extends Component {
     }
 
     handleSearch = ({isOfficial, status, keyword}) => {
+        const {pagination} = this.state;
+        pagination.skip = 0;
+        pagination.current = 1;
         this.setState({
             isOfficial,
             status,
-            keyword
+            keyword,
+            pagination
         });
         this.fetchListSong();
     }
@@ -201,14 +205,14 @@ export default class Song extends Component {
                         onFinish={this.handleSearch}
                         layout="inline">
                         <Form.Item name="isOfficial" label="Loại">
-                            <Select>
+                            <Select style={{width: 100}}>
                                 <Select.Option value="">Tất cả</Select.Option>
                                 <Select.Option value="0">MP3</Select.Option>
                                 <Select.Option value="1">MV</Select.Option>
                             </Select>
                         </Form.Item>
                         <Form.Item name="status" label="Trạng thái">
-                            <Select>
+                            <Select style={{width: 150}}>
                                 <Select.Option value="">Tất cả</Select.Option>
                                 <Select.Option value={SONG_STATUS.ACTIVE}>Đang hoạt động</Select.Option>
                                 <Select.Option value={SONG_STATUS.PENDING}>Chờ duyệt</Select.Option>

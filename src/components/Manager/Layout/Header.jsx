@@ -4,6 +4,7 @@ import {Layout, Avatar, Row, Col, Badge, Menu, Dropdown, Space} from 'antd';
 import 'antd/dist/antd.min.css';
 import RequestLoading from 'components/RequestLoading';
 import { BellOutlined } from '@ant-design/icons';
+import { getCDN } from 'utils';
 
 export class Header extends Component {
 
@@ -53,7 +54,7 @@ export class Header extends Component {
                                     style={{
                                         color: '#f56a00',
                                         backgroundColor: '#fde3cf'
-                                    }} src={userInfo.info.avatar}/>
+                                    }} src={getCDN(userInfo.info.avatar)}/>
                             </Dropdown>
                         </Space>
                     </Col>
