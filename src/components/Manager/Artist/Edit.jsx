@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Drawer, Form, Input, Upload, Button, notification} from 'antd';
+import {Drawer, Form, Input, Upload, Button, notification, Checkbox} from 'antd';
 import { FiUpload } from 'react-icons/fi';
 import { uploadMedia } from 'services/media';
-import { createCategory } from 'services/category';
+import { getCDN } from 'utils';
+import { updateArtist } from 'services/artist';
 
-export default class Create extends Component {
+export default class Edit extends Component {
     static propTypes = {
         visible: PropTypes.bool.isRequired,
+        editData: PropTypes.object.isRequired,
         onSuccess: PropTypes.func,
         onClose: PropTypes.func
     }
 
     static defaultProps = {
         visible: false,
+        editData: {},
         onSuccess: () => {},
         onClose: () => {}
     }
@@ -24,7 +27,8 @@ export default class Create extends Component {
             thumbnail: "",
             thumbnailData: "",
             cover: "",
-            coverData: ""
+            coverData: "",
+            fields: []
         }
     }
 
@@ -49,9 +53,9 @@ export default class Create extends Component {
         }
     }
 
-    handleSubmit = async ({title, description}) => {
+    handleSubmit = async ({fullName, isComposer}) => {
         const {thumbnail, cover} = this.state;
-        const {onSuccess} = this.props;
+        const {onSuccess, editData} = this.props;
         try{
             if (!cover) {
                 notification.error({message: "Vui lòng tải lên ảnh bìa!"});
@@ -61,19 +65,19 @@ export default class Create extends Component {
                 notification.error({message: "Vui lòng tải lên ảnh đại diện!"});
                 return;
             }
-            if(!title){
+            if(!fullName){
                 this.form.submit();
                 return;
             }
             let data = {
-                title,
-                description,
+                fullName,
+                isComposer,
                 thumbnail,
                 cover
             };
-            const result = await createCategory(data);
+            const result = await updateArtist(editData._id, data);
             notification.success({
-                message: "Tạo thể loại thành công"
+                message: "Cập nhật nghệ sĩ thành công"
             });
             onSuccess(result.data);
             this.handleClose();
@@ -100,19 +104,48 @@ export default class Create extends Component {
                     Đóng
                 </Button>
                 <Button onClick={this.handleSubmit} type="primary">
-                    Tạo thể loại
+                    Lưu thay đổi
                 </Button>
             </div>
         )
     }
 
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        if (snapshot.isEdit) {
+            let fields = [];
+            let initData = {
+                fullName: snapshot.editData.fullName,
+                isComposer: snapshot.editData.isComposer,
+            }
+            Object.keys(initData).map((key) => {
+                return fields.push({name: [key], value: initData[key]});
+            });
+            this.setState({
+                fullName: snapshot.editData.fullName,
+                isComposer: snapshot.editData.isComposer,
+                thumbnail: snapshot.editData.thumbnail,
+                thumbnailData: getCDN(snapshot.editData.thumbnail),
+                cover: snapshot.editData.cover,
+                coverData: getCDN(snapshot.editData.cover),
+                fields: fields
+            });
+        }
+    }
+
+    getSnapshotBeforeUpdate = (prevProps) => {
+        return {
+            isEdit: prevProps.editData !== this.props.editData && !!Object.keys(this.props.editData).length,
+            editData: this.props.editData
+        };
+    }
+
     render() {
-        const {thumbnailData, coverData} = this.state;
+        const {thumbnailData, coverData, fields} = this.state;
         const {visible} = this.props;
         return (
             <div>
                 <Drawer
-                    title="Thêm danh mục"
+                    title="Sửa nghệ sĩ"
                     placement="right"
                     width={500}
                     closable={true}
@@ -122,11 +155,11 @@ export default class Create extends Component {
                     footer={this.CustomFooter()}>
                     <Form
                         ref={(el) => this.form = el}
-                        fields={[]}
+                        fields={fields}
                         hideRequiredMark={true}
                         initialValues={{
-                            title: "",
-                            description: ""
+                            fullName: "",
+                            isComposer: false
                         }}
                         onFinish={this.handleSubmit}
                         layout="vertical">
@@ -173,17 +206,17 @@ export default class Create extends Component {
                             </Upload>
                         </Form.Item>
                         <Form.Item
-                            name="title"
-                            label="Tên thể loại"
+                            name="fullName"
+                            label="Tên nghệ sĩ"
                             rules={[{
                                     required: true,
-                                    message: "Vui lòng nhập tên thể loại"
+                                    message: "Vui lòng nhập tên nghệ sĩ"
                                 }
                             ]}>
-                            <Input placeholder="Nhập tên thể loại"/>
+                            <Input placeholder="Nhập tên nghệ sĩ"/>
                         </Form.Item>
-                        <Form.Item name="description" label="Mô tả">
-                            <Input.TextArea placeholder="Nhập mô tả"/>
+                        <Form.Item name="isComposer" valuePropName="checked">
+                            <Checkbox>Ca sĩ - Nhạc sĩ</Checkbox>
                         </Form.Item>
                     </Form>
                 </Drawer>

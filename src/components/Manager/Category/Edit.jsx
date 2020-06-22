@@ -145,7 +145,7 @@ export default class Edit extends Component {
         return (
             <div>
                 <Drawer
-                    title="Thêm danh mục"
+                    title="Sửa danh mục"
                     placement="right"
                     width={500}
                     closable={true}
@@ -166,6 +166,7 @@ export default class Edit extends Component {
                         <Form.Item label="Ảnh bìa">
                             <Upload
                                 name="cover"
+                                accept="image/*"
                                 listType="picture-card"
                                 className="category-upload"
                                 showUploadList={false}
@@ -186,6 +187,7 @@ export default class Edit extends Component {
                         <Form.Item label="Ảnh đại diện">
                             <Upload
                                 name="thumbnail"
+                                accept="image/*"
                                 listType="picture-card"
                                 className="category-upload"
                                 showUploadList={false}

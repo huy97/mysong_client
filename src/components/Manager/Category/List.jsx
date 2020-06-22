@@ -36,6 +36,7 @@ export default class ListSong extends Component {
             {
                 title: 'ID',
                 dataIndex: 'shortCode',
+                width: 120,
                 fixed: "left"
             },
             {
