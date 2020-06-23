@@ -6,6 +6,7 @@ const Manager = React.lazy(() => import('containers/Manager'));
 const Song = React.lazy(() => import('containers/Manager/Song'));
 const Category = React.lazy(() => import('containers/Manager/Category'));
 const Artist = React.lazy(() => import('containers/Manager/Artist'));
+const Role = React.lazy(() => import('containers/Manager/Role'));
 const User = React.lazy(() => import('containers/Manager/User'));
 
 const routes = [
@@ -52,7 +53,7 @@ const routes = [
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],
         isAdmin: true,
-        component: Manager
+        component: Role
     },
     {
         path: "/manager/user",

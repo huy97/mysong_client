@@ -131,8 +131,6 @@ export class Artist extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Artist)
+export default connect(mapStateToProps)(Artist)

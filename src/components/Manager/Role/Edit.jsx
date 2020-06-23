@@ -14,7 +14,7 @@ import { FiUpload } from "react-icons/fi";
 import { uploadMedia } from "services/media";
 import locale from "antd/es/date-picker/locale/vi_VN";
 import { updateUser } from "services/auth";
-import { getCDN, prepareTime } from "utils";
+import { getCDN } from "utils";
 import moment from "moment";
 
 export default class Create extends Component {
@@ -76,7 +76,8 @@ export default class Create extends Component {
                 fullName,
                 avatar,
                 isVip,
-                vipExpiredTime && prepareTime(vipExpiredTime),
+                vipExpiredTime &&
+                    vipExpiredTime.hours(23).minutes(59).seconds(59).utc(),
                 newPassword
             );
             notification.success({
@@ -133,7 +134,7 @@ export default class Create extends Component {
                 fullName: snapshot.editData.fullName,
                 username: snapshot.editData.username,
                 isVip: snapshot.editData.isVip,
-                vipExpiredTime: snapshot.editData.vipExpiredTime ? moment(snapshot.editData.vipExpiredTime) : null,
+                vipExpiredTime: moment(snapshot.editData.vipExpiredTime),
             };
             Object.keys(initData).map((key) => {
                 return fields.push({ name: [key], value: initData[key] });

@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
     Space,
-    Form,
     Card,
     Button,
-    notification,
-    Select,
-    Input
+    notification
 } from 'antd';
 import {FiPlus} from 'react-icons/fi';
 import {getSkip} from 'utils';
@@ -19,7 +16,7 @@ const List = React.lazy(() => import ('components/Manager/User/List'));
 const Create = React.lazy(() => import ('components/Manager/User/Create'));
 const Edit = React.lazy(() => import ('components/Manager/User/Edit'));
 
-export class User extends Component {
+export class Role extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -127,14 +124,6 @@ export class User extends Component {
         }
     }
 
-    handleSearch = ({keyword, isVip}) => {
-        const {pagination} = this.state;
-        pagination.skip = 0;
-        pagination.current = 1;
-        this.setState({keyword, isVip, pagination});
-        this.fetchListUser();
-    }
-
     render() {
         const {data, pagination, showCreate, showEdit, editData} = this.state;
         return (
@@ -144,34 +133,8 @@ export class User extends Component {
                     width: "100%",
                     display: "flex"
                 }}>
-                <Card title="Danh sách thể loại" bordered={false}>
-                    <Form
-                        initialValues={{
-                            isVip: "",
-                            keyword: ""
-                        }}
-                        onFinish={this.handleSearch}
-                        layout="inline">
-                        <Form.Item name="isVip" label="Loại tài khoản">
-                            <Select
-                                style={{
-                                    width: 100
-                                }}>
-                                <Select.Option value="">Tất cả</Select.Option>
-                                <Select.Option value="0">Thường</Select.Option>
-                                <Select.Option value="1">VIP</Select.Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item name="keyword" label="Từ khoá">
-                            <Input placeholder="Nhập tên đăng nhập, tên hiển thị"/>
-                        </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" title="Tìm kiếm">Tìm kiếm</Button>
-                        </Form.Item>
-                    </Form>
-                </Card>
                 <Card
-                    title="Danh sách thể loại"
+                    title="Danh sách quyền"
                     bordered={false}
                     extra={<Ability roles = {
                         [PERMISSION_CODE.CREATE]
@@ -203,4 +166,4 @@ export class User extends Component {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(User)
+export default connect(mapStateToProps)(Role)

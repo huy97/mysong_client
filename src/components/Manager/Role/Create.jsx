@@ -13,9 +13,8 @@ import {
 import { FiUpload } from "react-icons/fi";
 import { uploadMedia } from "services/media";
 import locale from "antd/es/date-picker/locale/vi_VN";
-import { updateUser } from "services/auth";
-import { getCDN, prepareTime } from "utils";
-import moment from "moment";
+import { createUser } from "services/auth";
+import { setFormErrors } from "utils";
 
 export default class Create extends Component {
     static propTypes = {
@@ -35,7 +34,6 @@ export default class Create extends Component {
         this.state = {
             avatar: "",
             avatarData: "",
-            fields: [],
         };
     }
 
@@ -57,44 +55,37 @@ export default class Create extends Component {
         } catch (e) {}
     };
 
-    handleSubmit = async ({ fullName, newPassword, isVip, vipExpiredTime }) => {
+    handleSubmit = async ({
+        fullName,
+        username,
+        password,
+        isVip,
+        vipExpiredTime,
+    }) => {
         const { avatar } = this.state;
-        const { onSuccess, editData } = this.props;
+        const { onSuccess } = this.props;
         try {
-            if (!avatar) {
-                notification.error({
-                    message: "Vui lòng tải lên ảnh đại diện!",
-                });
-                return;
-            }
             if (!fullName) {
                 this.form.submit();
                 return;
             }
-            const result = await updateUser(
-                editData._id,
+            const result = await createUser(
                 fullName,
+                username,
+                password,
+                password,
                 avatar,
                 isVip,
-                vipExpiredTime && prepareTime(vipExpiredTime),
-                newPassword
+                vipExpiredTime &&
+                    vipExpiredTime.hours(23).minutes(59).seconds(59).utc()
             );
             notification.success({
-                message: "Cập nhật người dùng thành công",
+                message: "Tạo người dùng thành công",
             });
             onSuccess(result.data);
             this.handleClose();
         } catch (e) {
-            if (e.errors && e.errors.length) {
-                let fields = e.errors.map((obj) => {
-                    return {
-                        name: [obj.param],
-                        value: obj.value,
-                        errors: [obj.msg],
-                    };
-                });
-                this.form.setFields(fields);
-            }
+            setFormErrors(this.form, e.errors);
             notification.error({ message: e.message });
         }
     };
@@ -120,48 +111,19 @@ export default class Create extends Component {
                     Đóng
                 </Button>
                 <Button onClick={this.handleSubmit} type="primary">
-                    Lưu thông tin
+                    Tạo người dùng
                 </Button>
             </div>
         );
     };
 
-    componentDidUpdate = (prevProps, prevState, snapshot) => {
-        if (snapshot.isEdit) {
-            let fields = [];
-            let initData = {
-                fullName: snapshot.editData.fullName,
-                username: snapshot.editData.username,
-                isVip: snapshot.editData.isVip,
-                vipExpiredTime: snapshot.editData.vipExpiredTime ? moment(snapshot.editData.vipExpiredTime) : null,
-            };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
-            this.setState({
-                avatar: snapshot.editData.avatar,
-                avatarData: getCDN(snapshot.editData.avatar),
-                fields: fields,
-            });
-        }
-    };
-
-    getSnapshotBeforeUpdate = (prevProps) => {
-        return {
-            isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
-            editData: this.props.editData,
-        };
-    };
-
     render() {
-        const { avatarData, fields } = this.state;
+        const { avatarData } = this.state;
         const { visible } = this.props;
         return (
             <div>
                 <Drawer
-                    title="Sửa người dùng"
+                    title="Thêm người dùng"
                     placement="right"
                     width={500}
                     closable={true}
@@ -172,7 +134,14 @@ export default class Create extends Component {
                 >
                     <Form
                         ref={(el) => (this.form = el)}
-                        fields={fields}
+                        fields={[]}
+                        initialValues={{
+                            fullName: "",
+                            username: "",
+                            password: "",
+                            isVip: false,
+                            vipExpiredTime: null,
+                        }}
                         onFinish={this.handleSubmit}
                         layout="vertical"
                     >
@@ -221,12 +190,21 @@ export default class Create extends Component {
                                 },
                             ]}
                         >
-                            <Input disabled placeholder="Nhập tên đăng nhập" />
+                            <Input placeholder="Nhập tên đăng nhập" />
                         </Form.Item>
-                        <Form.Item name="newPassword" label="Mật khẩu mới">
+                        <Form.Item
+                            name="password"
+                            label="Mật khẩu"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập mật khẩu",
+                                },
+                            ]}
+                        >
                             <Input
-                                type="newPassword"
-                                placeholder="Nhập mật khẩu mới"
+                                type="password"
+                                placeholder="Nhập mật khẩu"
                             />
                         </Form.Item>
                         <Form.Item name="isVip" valuePropName="checked">
