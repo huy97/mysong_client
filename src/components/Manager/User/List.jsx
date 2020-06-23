@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Table, Button, Popconfirm, Tag } from "antd";
+import { Table, Button, Popconfirm, Tag, Tooltip } from "antd";
 import PropTypes from "prop-types";
-import { FiTrash, FiEdit3 } from "react-icons/fi";
-import { getCDN } from "utils";
+import { FiTrash, FiEdit3, FiShield } from "react-icons/fi";
+import { getCDN, getRandomColor } from "utils";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Ability from "containers/Ability";
@@ -52,6 +52,11 @@ export default class ListSong extends Component {
                 render: (text, record) => <b>{text}</b>,
             },
             {
+                title: "Phân quyền",
+                dataIndex: "roles",
+                render: (roles, record) => roles.map((obj, key) => <Tag key={key} color={getRandomColor()}>{obj.description} </Tag>),
+            },
+            {
                 title: "Ảnh đại diện",
                 dataIndex: "avatar",
                 render: (thumbnail, record) => (
@@ -91,15 +96,26 @@ export default class ListSong extends Component {
             {
                 title: "Hành động",
                 fixed: "right",
-                width: 100,
+                width: 150,
                 render: (text, record) => (
                     <>
+                        <Ability roles={[PERMISSION_CODE.MANAGER]}>
+                            <Tooltip title="Phân quyền">
+                                <Button
+                                    type="link"
+                                    icon={<FiShield />}
+                                    onClick={(e) => onEdit(e, record)}
+                                />
+                            </Tooltip>
+                        </Ability>
                         <Ability roles={[PERMISSION_CODE.UPDATE]}>
-                            <Button
-                                type="link"
-                                icon={<FiEdit3 />}
-                                onClick={(e) => onEdit(e, record)}
-                            />
+                            <Tooltip title="Sửa">
+                                <Button
+                                    type="link"
+                                    icon={<FiEdit3 />}
+                                    onClick={(e) => onEdit(e, record)}
+                                />
+                            </Tooltip>
                         </Ability>
                         <Ability roles={[PERMISSION_CODE.DELETE]}>
                             <Popconfirm
@@ -115,7 +131,9 @@ export default class ListSong extends Component {
                                 }
                                 onConfirm={(e) => onDelete(e, record)}
                             >
-                                <Button type="link" danger icon={<FiTrash />} />
+                                <Tooltip title="Xoá">
+                                    <Button type="link" danger icon={<FiTrash />} />
+                                </Tooltip>
                             </Popconfirm>
                         </Ability>
                     </>

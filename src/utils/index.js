@@ -21,6 +21,15 @@ export const getCDN = (url) => {
     return CDN_URL + url;
 }
 
+export const getRandomColor = () => {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 export const setFormErrors = (form, errors = []) => {
     if(!form) return false;
     let fields = errors.map((obj) => {

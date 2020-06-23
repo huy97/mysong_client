@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, Tooltip } from "antd";
 import PropTypes from "prop-types";
 import { FiTrash, FiEdit3 } from "react-icons/fi";
 import { getCDN } from "utils";
@@ -96,11 +96,13 @@ export default class ListSong extends Component {
                 render: (text, record) => (
                     <>
                         <Ability roles={[PERMISSION_CODE.UPDATE]}>
-                            <Button
-                                type="link"
-                                icon={<FiEdit3 />}
-                                onClick={(e) => onEdit(e, record)}
-                            />
+                            <Tooltip title="Sửa">
+                                <Button
+                                    type="link"
+                                    icon={<FiEdit3 />}
+                                    onClick={(e) => onEdit(e, record)}
+                                />
+                            </Tooltip>
                         </Ability>
                         <Ability roles={[PERMISSION_CODE.DELETE]}>
                             <Popconfirm
@@ -116,7 +118,9 @@ export default class ListSong extends Component {
                                 }
                                 onConfirm={(e) => onDelete(e, record)}
                             >
-                                <Button type="link" danger icon={<FiTrash />} />
+                                <Tooltip title="Xoá">
+                                    <Button type="link" danger icon={<FiTrash />} />
+                                </Tooltip>
                             </Popconfirm>
                         </Ability>
                     </>

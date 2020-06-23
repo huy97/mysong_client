@@ -4,17 +4,12 @@ import {
     Drawer,
     Form,
     Input,
-    Upload,
     Button,
     notification,
     Checkbox,
-    DatePicker,
 } from "antd";
-import { FiUpload } from "react-icons/fi";
-import { uploadMedia } from "services/media";
-import locale from "antd/es/date-picker/locale/vi_VN";
-import { createUser } from "services/auth";
 import { setFormErrors } from "utils";
+import { createRole } from "services/auth";
 
 export default class Create extends Component {
     static propTypes = {
@@ -29,58 +24,19 @@ export default class Create extends Component {
         onClose: () => {},
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            avatar: "",
-            avatarData: "",
-        };
-    }
-
-    handleUpload = async ({ file, onSuccess, onError, onProgress }) => {
-        try {
-            const result = await uploadMedia(file, (e) => {
-                onProgress({
-                    percent: Math.ceil(e.loaded / e.total) * 100,
-                });
-            });
-            let frd = new FileReader();
-            frd.onload = ({ target }) => {
-                this.setState({
-                    avatarData: target.result,
-                    avatar: result.data.minimizePath,
-                });
-            };
-            frd.readAsDataURL(file);
-        } catch (e) {}
-    };
-
     handleSubmit = async ({
-        fullName,
-        username,
-        password,
-        isVip,
-        vipExpiredTime,
+        description,
+        permissionCodes
     }) => {
-        const { avatar } = this.state;
         const { onSuccess } = this.props;
         try {
-            if (!fullName) {
+            if (!description) {
                 this.form.submit();
                 return;
             }
-            const result = await createUser(
-                fullName,
-                username,
-                password,
-                password,
-                avatar,
-                isVip,
-                vipExpiredTime &&
-                    vipExpiredTime.hours(23).minutes(59).seconds(59).utc()
-            );
+            const result = await createRole(description, permissionCodes);
             notification.success({
-                message: "Tạo người dùng thành công",
+                message: "Tạo quyền thành công",
             });
             onSuccess(result.data);
             this.handleClose();
@@ -91,7 +47,6 @@ export default class Create extends Component {
     };
 
     handleClose = () => {
-        this.setState({ avatar: "", avatarData: "" });
         this.props.onClose();
     };
 
@@ -111,19 +66,18 @@ export default class Create extends Component {
                     Đóng
                 </Button>
                 <Button onClick={this.handleSubmit} type="primary">
-                    Tạo người dùng
+                    Tạo quyền
                 </Button>
             </div>
         );
     };
 
     render() {
-        const { avatarData } = this.state;
-        const { visible } = this.props;
+        const { visible, listPermissions } = this.props;
         return (
             <div>
                 <Drawer
-                    title="Thêm người dùng"
+                    title="Thêm quyền"
                     placement="right"
                     width={500}
                     closable={true}
@@ -136,90 +90,31 @@ export default class Create extends Component {
                         ref={(el) => (this.form = el)}
                         fields={[]}
                         initialValues={{
-                            fullName: "",
-                            username: "",
-                            password: "",
-                            isVip: false,
-                            vipExpiredTime: null,
+                            description: "",
+                            permissionCodes: []
                         }}
                         onFinish={this.handleSubmit}
                         layout="vertical"
                     >
-                        <Form.Item label="Ảnh đại diện">
-                            <Upload
-                                name="avatar"
-                                accept="image/*"
-                                listType="picture-card"
-                                className="category-upload"
-                                showUploadList={false}
-                                customRequest={this.handleUpload}
-                            >
-                                {avatarData ? (
-                                    <img
-                                        src={avatarData}
-                                        alt="Ảnh đại diện"
-                                        style={{
-                                            width: 150,
-                                            height: 150,
-                                        }}
-                                    />
-                                ) : (
-                                    <FiUpload style={{ fontSize: 24 }} />
-                                )}
-                            </Upload>
-                        </Form.Item>
                         <Form.Item
-                            name="fullName"
-                            label="Tên hiển thị"
+                            name="description"
+                            label="Mô tả"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Vui lòng nhập tên hiển thị",
+                                    message: "Vui lòng nhập mô tả",
                                 },
                             ]}
                         >
-                            <Input placeholder="Nhập tên hiển thị" />
+                            <Input placeholder="Nhập mô tả" />
                         </Form.Item>
-                        <Form.Item
-                            name="username"
-                            label="Tên đăng nhập"
-                            rules={[
+                        <Form.Item name="permissionCodes" label="Quyền" rules={[
                                 {
                                     required: true,
-                                    message: "Vui lòng nhập tên đăng nhập",
+                                    message: "Vui lòng chọn ít nhất 1 quyền",
                                 },
-                            ]}
-                        >
-                            <Input placeholder="Nhập tên đăng nhập" />
-                        </Form.Item>
-                        <Form.Item
-                            name="password"
-                            label="Mật khẩu"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Vui lòng nhập mật khẩu",
-                                },
-                            ]}
-                        >
-                            <Input
-                                type="password"
-                                placeholder="Nhập mật khẩu"
-                            />
-                        </Form.Item>
-                        <Form.Item name="isVip" valuePropName="checked">
-                            <Checkbox>VIP</Checkbox>
-                        </Form.Item>
-                        <Form.Item
-                            name="vipExpiredTime"
-                            label="Ngày hết hạn VIP"
-                        >
-                            <DatePicker
-                                locale={locale}
-                                placeholder="Chọn ngày"
-                                format="DD/MM/YYYY"
-                                style={{ display: "block" }}
-                            />
+                            ]}>
+                            <Checkbox.Group options={listPermissions}></Checkbox.Group>
                         </Form.Item>
                     </Form>
                 </Drawer>

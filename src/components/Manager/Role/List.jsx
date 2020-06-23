@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Table, Button, Popconfirm, Tag } from "antd";
+import { Table, Button, Popconfirm, Tag, Tooltip } from "antd";
 import PropTypes from "prop-types";
 import { FiTrash, FiEdit3 } from "react-icons/fi";
-import { getCDN } from "utils";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Ability from "containers/Ability";
 import { PERMISSION_CODE } from "constants/global";
+import { getRandomColor } from "utils";
 
 export default class ListSong extends Component {
     static propTypes = {
@@ -41,52 +41,24 @@ export default class ListSong extends Component {
         } = this.props;
         const columns = [
             {
-                title: "Username",
-                dataIndex: "username",
-                width: 120,
+                title: "ID",
+                dataIndex: "roleId",
                 fixed: "left",
             },
             {
-                title: "Tên hiển thị",
-                dataIndex: "fullName",
+                title: "Mô tả",
+                dataIndex: "description",
                 render: (text, record) => <b>{text}</b>,
             },
             {
-                title: "Ảnh đại diện",
-                dataIndex: "avatar",
-                render: (thumbnail, record) => (
-                    <img
-                        width="50"
-                        height="50"
-                        alt="Ảnh đại diện"
-                        src={getCDN(thumbnail)}
-                    />
-                ),
+                title: "Quyền",
+                dataIndex: "permissionCodes",
+                render: (permissions) => permissions.map((permission, key) => <Tag color={getRandomColor()} key={key}>{permission}</Tag>),
             },
             {
                 title: "Ngày tạo",
                 dataIndex: "createdAt",
                 render: (time) => moment(time).format("DD/MM/YYYY HH:mm"),
-            },
-            {
-                title: "Loại tài khoản",
-                dataIndex: "isVip",
-                render: (value, record) =>
-                    value ? (
-                        <Tag color="red" key={1}>
-                            <b>VIP</b>
-                        </Tag>
-                    ) : (
-                        <Tag key={1}>Thường</Tag>
-                    ),
-            },
-            {
-                title: "Ngày hết hạn VIP",
-                dataIndex: "vipExpiredTime",
-                render: (time, record) =>
-                    record.isVip && time
-                        ? moment(time).format("DD/MM/YYYY HH:mm")
-                        : "",
             },
             {
                 title: "Hành động",
@@ -95,11 +67,13 @@ export default class ListSong extends Component {
                 render: (text, record) => (
                     <>
                         <Ability roles={[PERMISSION_CODE.UPDATE]}>
-                            <Button
-                                type="link"
-                                icon={<FiEdit3 />}
-                                onClick={(e) => onEdit(e, record)}
-                            />
+                            <Tooltip title="Sửa">
+                                <Button
+                                    type="link"
+                                    icon={<FiEdit3 />}
+                                    onClick={(e) => onEdit(e, record)}
+                                />
+                            </Tooltip>
                         </Ability>
                         <Ability roles={[PERMISSION_CODE.DELETE]}>
                             <Popconfirm
@@ -115,7 +89,9 @@ export default class ListSong extends Component {
                                 }
                                 onConfirm={(e) => onDelete(e, record)}
                             >
-                                <Button type="link" danger icon={<FiTrash />} />
+                                <Tooltip title="Xoá">
+                                    <Button type="link" danger icon={<FiTrash />} />
+                                </Tooltip>
                             </Popconfirm>
                         </Ability>
                     </>

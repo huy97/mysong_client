@@ -10,22 +10,21 @@ import {FiPlus} from 'react-icons/fi';
 import {getSkip} from 'utils';
 import Ability from 'containers/Ability';
 import {PERMISSION_CODE} from 'constants/global';
-import {fetchListUser, deleteUser} from 'services/auth';
+import {fetchListRoles, fetchListPermission, deleteRole} from 'services/auth';
 
-const List = React.lazy(() => import ('components/Manager/User/List'));
-const Create = React.lazy(() => import ('components/Manager/User/Create'));
-const Edit = React.lazy(() => import ('components/Manager/User/Edit'));
+const List = React.lazy(() => import ('components/Manager/Role/List'));
+const Create = React.lazy(() => import ('components/Manager/Role/Create'));
+const Edit = React.lazy(() => import ('components/Manager/Role/Edit'));
 
 export class Role extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isVip: "",
-            keyword: "",
             data: [],
             showCreate: false,
             showEdit: false,
             editData: {},
+            listPermissions: [],
             pagination: {
                 skip: 0,
                 current: 1,
@@ -35,15 +34,14 @@ export class Role extends Component {
         }
     }
     componentDidMount() {
-        this.fetchListUser();
+        this.fetchListRoles();
+        this.fetchListPermission();
     }
 
-    fetchListUser = async () => {
-        const {keyword, isVip, pagination} = this.state;
+    fetchListRoles = async () => {
+        const {pagination} = this.state;
         try {
-            const result = await fetchListUser(
-                keyword,
-                isVip,
+            const result = await fetchListRoles(
                 pagination.skip,
                 pagination.pageSize
             );
@@ -62,12 +60,27 @@ export class Role extends Component {
         }
     }
 
+    fetchListPermission = async () => {
+        try{
+            const result = await fetchListPermission();
+            let listPermissions = result.data.map((obj) => {
+                return {
+                    label: obj.permissionCode,
+                    value: obj.permissionCode
+                }
+            })
+            this.setState({listPermissions});
+        }catch(e){
+            //
+        }
+    }
+
     handlePaginate = (e) => {
         const {pagination} = this.state;
         pagination.skip = getSkip(e, pagination.pageSize);
         pagination.current = e;
         this.setState({pagination});
-        this.fetchListUser();
+        this.fetchListRoles();
     }
 
     handleToggleCreate = () => {
@@ -90,8 +103,8 @@ export class Role extends Component {
     handleDelete = async (e, item) => {
         let {data} = this.state;
         try {
-            await deleteUser(item._id);
-            let index = data.findIndex((obj) => obj._id === item._id);
+            await deleteRole(item.roleId);
+            let index = data.findIndex((obj) => obj.roleId === item.roleId);
             if (index !== -1) {
                 data.splice(index, 1);
                 this.setState({
@@ -112,7 +125,7 @@ export class Role extends Component {
 
     handleEditSuccess = (item) => {
         let {data} = this.state;
-        let index = data.findIndex((obj) => obj._id === item._id);
+        let index = data.findIndex((obj) => obj.roleId === item.roleId);
         if (index !== -1) {
             data[index] = {
                 key: index,
@@ -125,7 +138,7 @@ export class Role extends Component {
     }
 
     render() {
-        const {data, pagination, showCreate, showEdit, editData} = this.state;
+        const {data, pagination, showCreate, showEdit, editData, listPermissions} = this.state;
         return (
             <Space
                 direction={"vertical"}
@@ -151,10 +164,12 @@ export class Role extends Component {
                         onEdit={this.handleToggleEdit}/>
                     <Create
                         visible={showCreate}
+                        listPermissions={listPermissions}
                         onSuccess={this.handleCreateSuccess}
                         onClose={this.handleToggleCreate}/>
                     <Edit
                         visible={showEdit}
+                        listPermissions={listPermissions}
                         editData={editData}
                         onSuccess={this.handleEditSuccess}
                         onClose={this.handleToggleEdit}/>

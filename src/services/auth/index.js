@@ -1,4 +1,4 @@
-import {LOGIN_URL, REGISTER_URL, GET_USER_INFO_URL, LIST_USER_URL, CREATE_USER_URL, UPDATE_DELETE_USER_URL, LIST_ROLES_USER_URL, LIST_PERMISSION_USER_URL} from "constants/global";
+import {LOGIN_URL, REGISTER_URL, GET_USER_INFO_URL, LIST_USER_URL, CREATE_USER_URL, UPDATE_DELETE_USER_URL, LIST_ROLES_USER_URL, LIST_PERMISSION_USER_URL, UPDATE_DELETE_ROLE_URL, CREATE_ROLE_URL} from "constants/global";
 import services from "services";
 
 export const login = async (username, password) => {
@@ -64,6 +64,24 @@ export const fetchListRoles = async (skip, limit) => {
             limit
         }
     })
+}
+
+export const createRole = async (description, permissionCodes) => {
+    return await services.post(CREATE_ROLE_URL, {
+        description,
+        permissionCodes
+    });
+}
+
+export const updateRole = async (roleId, description, permissionCodes) => {
+    return await services.put(UPDATE_DELETE_ROLE_URL.replace(':id', roleId), {
+        description,
+        permissionCodes
+    });
+}
+
+export const deleteRole = async (roleId) => {
+    return await services.delete(UPDATE_DELETE_ROLE_URL.replace(':id', roleId));
 }
 
 export const fetchListPermission = async (skip, limit) => {
