@@ -14,7 +14,7 @@ import { FiUpload } from "react-icons/fi";
 import { uploadMedia } from "services/media";
 import locale from "antd/es/date-picker/locale/vi_VN";
 import { updateUser } from "services/auth";
-import { getCDN, prepareTime } from "utils";
+import { getCDN, prepareTime, initFields } from "utils";
 import moment from "moment";
 
 export default class Create extends Component {
@@ -128,16 +128,13 @@ export default class Create extends Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (snapshot.isEdit) {
-            let fields = [];
             let initData = {
                 fullName: snapshot.editData.fullName,
                 username: snapshot.editData.username,
                 isVip: snapshot.editData.isVip,
                 vipExpiredTime: snapshot.editData.vipExpiredTime ? moment(snapshot.editData.vipExpiredTime) : null,
             };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
+            let fields = initFields(initData);
             this.setState({
                 avatar: snapshot.editData.avatar,
                 avatarData: getCDN(snapshot.editData.avatar),
@@ -148,9 +145,7 @@ export default class Create extends Component {
 
     getSnapshotBeforeUpdate = (prevProps) => {
         return {
-            isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
+            isEdit: prevProps.editData !== this.props.editData && !!this.props.editData._id,
             editData: this.props.editData,
         };
     };

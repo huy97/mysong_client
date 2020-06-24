@@ -22,12 +22,20 @@ export const getCDN = (url) => {
 }
 
 export const getRandomColor = () => {
-    var letters = '0123456789ABCDEF';
+    var letters = '0123456789ABCABC';
     var color = '#';
     for (var i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}
+
+export const initFields = (initData = {}) => {
+    let fields = [];
+    Object.keys(initData).map((key) => {
+        return fields.push({ name: [key], value: initData[key] });
+    });
+    return fields;
 }
 
 export const setFormErrors = (form, errors = []) => {

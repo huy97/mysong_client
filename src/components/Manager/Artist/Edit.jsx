@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { FiUpload } from "react-icons/fi";
 import { uploadMedia } from "services/media";
-import { getCDN } from "utils";
+import { getCDN, initFields } from "utils";
 import { updateArtist } from "services/artist";
 
 export default class Edit extends Component {
@@ -137,14 +137,11 @@ export default class Edit extends Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (snapshot.isEdit) {
-            let fields = [];
             let initData = {
                 fullName: snapshot.editData.fullName,
                 isComposer: snapshot.editData.isComposer,
             };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
+            let fields = initFields(initData);
             this.setState({
                 thumbnail: snapshot.editData.thumbnail,
                 thumbnailData: getCDN(snapshot.editData.thumbnail),
@@ -158,8 +155,7 @@ export default class Edit extends Component {
     getSnapshotBeforeUpdate = (prevProps) => {
         return {
             isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
+                prevProps.editData !== this.props.editData && !!this.props.editData._id,
             editData: this.props.editData,
         };
     };

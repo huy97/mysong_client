@@ -21,7 +21,7 @@ const routes = [
     },
     {
         path: "/manager/songs",
-        title: "Bài hát",
+        title: "Quản lý bài hát",
         icon: <RiDiscLine className="menu-icon"/>,
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],
@@ -30,7 +30,7 @@ const routes = [
     },
     {
         path: "/manager/categories",
-        title: "Danh mục",
+        title: "Quản lý danh mục",
         icon: <RiArticleLine className="menu-icon"/>,
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],
@@ -39,7 +39,7 @@ const routes = [
     },
     {
         path: "/manager/artists",
-        title: "Nghệ sĩ",
+        title: "Quản lý nghệ sĩ",
         icon: <RiUserStarLine className="menu-icon"/>,
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],
@@ -48,7 +48,7 @@ const routes = [
     },
     {
         path: "/manager/role",
-        title: "Phân quyền",
+        title: "Quản lý phân quyền",
         icon: <RiShieldUserLine className="menu-icon"/>,
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],
@@ -57,7 +57,7 @@ const routes = [
     },
     {
         path: "/manager/user",
-        title: "Người dùng",
+        title: "Quản lý người dùng",
         icon: <RiUserLine className="menu-icon"/>,
         isPrivate: true,
         roles: [PERMISSION_CODE.MANAGER],

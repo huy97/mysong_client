@@ -8,7 +8,7 @@ import {
     notification,
     Checkbox,
 } from "antd";
-import { setFormErrors } from "utils";
+import { setFormErrors, initFields } from "utils";
 import { updateRole } from "services/auth";
 
 export default class Create extends Component {
@@ -59,14 +59,11 @@ export default class Create extends Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (snapshot.isEdit) {
-            let fields = [];
             let initData = {
                 description: snapshot.editData.description,
                 permissionCodes: snapshot.editData.permissionCodes
             };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
+            let fields = initFields(initData);
             this.setState({
                 fields: fields
             });
@@ -76,8 +73,7 @@ export default class Create extends Component {
     getSnapshotBeforeUpdate = (prevProps) => {
         return {
             isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
+                prevProps.editData !== this.props.editData && !!this.props.editData._id,
             editData: this.props.editData,
         };
     };

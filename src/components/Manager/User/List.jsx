@@ -26,6 +26,7 @@ export default class ListSong extends Component {
         onPaginate: () => {},
         onDelete: () => {},
         onEdit: () => {},
+        onUpdateRole: () => {},
         pagination: {},
     };
 
@@ -38,6 +39,7 @@ export default class ListSong extends Component {
             pagination,
             onDelete,
             onEdit,
+            onUpdateRole
         } = this.props;
         const columns = [
             {
@@ -99,12 +101,12 @@ export default class ListSong extends Component {
                 width: 150,
                 render: (text, record) => (
                     <>
-                        <Ability roles={[PERMISSION_CODE.MANAGER]}>
+                        <Ability roles={[PERMISSION_CODE.MANAGER, PERMISSION_CODE.READ, PERMISSION_CODE.CREATE, PERMISSION_CODE.UPDATE, PERMISSION_CODE.DELETE]}>
                             <Tooltip title="Phân quyền">
                                 <Button
                                     type="link"
                                     icon={<FiShield />}
-                                    onClick={(e) => onEdit(e, record)}
+                                    onClick={(e) => onUpdateRole(e, record)}
                                 />
                             </Tooltip>
                         </Ability>

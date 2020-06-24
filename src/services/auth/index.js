@@ -1,4 +1,4 @@
-import {LOGIN_URL, REGISTER_URL, GET_USER_INFO_URL, LIST_USER_URL, CREATE_USER_URL, UPDATE_DELETE_USER_URL, LIST_ROLES_USER_URL, LIST_PERMISSION_USER_URL, UPDATE_DELETE_ROLE_URL, CREATE_ROLE_URL} from "constants/global";
+import {LOGIN_URL, REGISTER_URL, GET_USER_INFO_URL, LIST_USER_URL, CREATE_USER_URL, UPDATE_DELETE_USER_URL, LIST_ROLES_USER_URL, LIST_PERMISSION_USER_URL, UPDATE_DELETE_ROLE_URL, CREATE_ROLE_URL, UPDATE_USERROLE_URL} from "constants/global";
 import services from "services";
 
 export const login = async (username, password) => {
@@ -50,6 +50,12 @@ export const updateUser = async (userId, fullName, avatar, isVip, vipExpiredTime
         isVip,
         vipExpiredTime,
         newPassword
+    });
+}
+
+export const updateUserRole = async (userId, roleIds) => {
+    return await services.put(UPDATE_USERROLE_URL.replace(':id', userId), {
+        roleIds
     });
 }
 

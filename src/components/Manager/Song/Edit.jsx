@@ -22,7 +22,7 @@ import {
 import { uploadMedia } from "services/media";
 import { updateSong } from "services/song";
 import { deleteSongLyric, updateSongLyric } from "services/lyric";
-import { getCDN } from "utils";
+import { getCDN, initFields } from "utils";
 import { FiTrash, FiUpload } from "react-icons/fi";
 
 export default class Edit extends Component {
@@ -166,7 +166,6 @@ export default class Edit extends Component {
 
     componentDidUpdate = async (prevProps, prevState, snapshot) => {
         if (snapshot.isEdit) {
-            let fields = [];
             let initData = {
                 title: snapshot.editData.title,
                 isOfficial: snapshot.editData.isOfficial,
@@ -176,9 +175,7 @@ export default class Edit extends Component {
                 categories: snapshot.editData.categories.map((obj) => obj._id),
                 artists: snapshot.editData.artists.map((obj) => obj._id),
             };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
+            let fields = initFields(initData);
             this.setState({
                 thumbnail: snapshot.editData.thumbnail,
                 thumbnailMedium: snapshot.editData.thumbnailMedium,
@@ -193,8 +190,7 @@ export default class Edit extends Component {
     getSnapshotBeforeUpdate = (prevProps) => {
         return {
             isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
+                prevProps.editData !== this.props.editData && !!this.props.editData._id,
             editData: this.props.editData,
         };
     };

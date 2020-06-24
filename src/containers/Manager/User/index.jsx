@@ -13,11 +13,12 @@ import {FiPlus} from 'react-icons/fi';
 import {getSkip} from 'utils';
 import Ability from 'containers/Ability';
 import {PERMISSION_CODE} from 'constants/global';
-import {fetchListUser, deleteUser} from 'services/auth';
+import {fetchListUser, deleteUser, fetchListRoles} from 'services/auth';
 
 const List = React.lazy(() => import ('components/Manager/User/List'));
 const Create = React.lazy(() => import ('components/Manager/User/Create'));
 const Edit = React.lazy(() => import ('components/Manager/User/Edit'));
+const UpdateRole = React.lazy(() => import ('components/Manager/User/UpdateRole'));
 
 export class User extends Component {
     constructor(props) {
@@ -28,7 +29,9 @@ export class User extends Component {
             data: [],
             showCreate: false,
             showEdit: false,
+            showUpdateRole: false,
             editData: {},
+            listRoles: [],
             pagination: {
                 skip: 0,
                 current: 1,
@@ -39,6 +42,7 @@ export class User extends Component {
     }
     componentDidMount() {
         this.fetchListUser();
+        this.fetchRole();
     }
 
     fetchListUser = async () => {
@@ -61,6 +65,21 @@ export class User extends Component {
             pagination.total = result.total;
             this.setState({data, pagination});
         } catch (e) {
+            //
+        }
+    }
+
+    fetchRole = async () => {
+        try{
+            const result = await fetchListRoles();
+            let listRoles = result.data.map((obj) => {
+                return {
+                    label: obj.description,
+                    value: obj.roleId
+                }
+            })
+            this.setState({listRoles: listRoles});
+        }catch(e){
             //
         }
     }
@@ -135,8 +154,26 @@ export class User extends Component {
         this.fetchListUser();
     }
 
+    handleToggleUpdateRole = (e, item) => {
+        this.setState({showUpdateRole: !this.state.showUpdateRole, editData: item || {}});
+    }
+
+    handleUpdateRoleOk = async (item) => {
+        let {data} = this.state;
+        let index = data.findIndex((obj) => obj._id === item._id);
+        if (index !== -1) {
+            data[index] = {
+                key: index,
+                ...item
+            }
+            this.setState({
+                data: [...data]
+            });
+        }
+    }
+
     render() {
-        const {data, pagination, showCreate, showEdit, editData} = this.state;
+        const {data, pagination, showCreate, showEdit, showUpdateRole, editData, listRoles} = this.state;
         return (
             <Space
                 direction={"vertical"}
@@ -185,7 +222,9 @@ export class User extends Component {
                         pagination={pagination}
                         onPaginate={this.handlePaginate}
                         onDelete={this.handleDelete}
-                        onEdit={this.handleToggleEdit}/>
+                        onEdit={this.handleToggleEdit}
+                        onUpdateRole={this.handleToggleUpdateRole}
+                        />
                     <Create
                         visible={showCreate}
                         onSuccess={this.handleCreateSuccess}
@@ -195,6 +234,13 @@ export class User extends Component {
                         editData={editData}
                         onSuccess={this.handleEditSuccess}
                         onClose={this.handleToggleEdit}/>
+                    <UpdateRole
+                        visible={showUpdateRole}
+                        listRoles={listRoles}
+                        editData={editData}
+                        onOk={this.handleUpdateRoleOk}
+                        onCancel={this.handleToggleUpdateRole}
+                    />
                 </Card>
             </Space>
         )

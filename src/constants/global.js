@@ -28,6 +28,7 @@ export const REGISTER_URL = '/user/register';
 export const GET_USER_INFO_URL = '/user/get-user-info';
 export const CREATE_USER_URL = '/user/create-user';
 export const UPDATE_DELETE_USER_URL = '/user/:id';
+export const UPDATE_USERROLE_URL = '/user/:id/roles';
 export const LIST_USER_URL = '/user/get-list-user';
 export const LIST_ROLES_USER_URL = '/user/get-list-roles';
 export const LIST_PERMISSION_USER_URL = '/user/get-list-permissions';

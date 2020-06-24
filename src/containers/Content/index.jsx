@@ -5,7 +5,9 @@ import {getUserToken, checkRole} from 'utils';
 import NotFound from 'containers/NotFound';
 import Layout from 'antd/lib/layout';
 import { get } from 'lodash';
+import RequestLoading from 'components/RequestLoading';
 
+//Admin component
 const ManagerHeader = React.lazy(
     () => import ('components/Manager/Layout/Header')
 );
@@ -14,6 +16,14 @@ const ManagerSidebar = React.lazy(
 );
 const ManagerBreadcrumb = React.lazy(
     () => import ('components/Manager/Layout/Breadcrumb')
+);
+//End
+//User component
+const Sidebar = React.lazy(
+    () => import ('components/Layout/Sidebar')
+);
+const Header = React.lazy(
+    () => import ('components/Layout/Header')
 );
 
 export class Content extends Component {
@@ -43,6 +53,7 @@ export class Content extends Component {
                         <ManagerSidebar history={history}/>
                         <Layout>
                             <ManagerHeader/>
+                            <RequestLoading/>
                             <Layout
                                 style={{
                                     backgroundColor: '#f8f8f8',
@@ -66,7 +77,12 @@ export class Content extends Component {
         }
         return (
             <div>
-                Home sidebar {children}
+                <Header/>
+                <RequestLoading style={{top: 90}}/>
+                <Sidebar history={history}/>
+                <div className="wrapper">
+                    {children}
+                </div>
             </div>
         )
     }

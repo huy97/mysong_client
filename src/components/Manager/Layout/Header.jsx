@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Layout, Avatar, Row, Col, Badge, Menu, Dropdown, Space} from 'antd';
 import 'antd/dist/antd.min.css';
-import RequestLoading from 'components/RequestLoading';
 import { BellOutlined } from '@ant-design/icons';
 import { getCDN } from 'utils';
 
@@ -34,7 +33,11 @@ export class Header extends Component {
                         zIndex: 9
                     }}>
                 <Row>
-                    <Col flex={1}></Col>
+                    <Col flex={1}>
+                        <div className="manager-logo">
+                            <span>mySong</span>
+                        </div>
+                    </Col>
                     <Col>
                         <Space direction="horizontal" size={30}>
                             <Dropdown overlay={this.notification} trigger={['click']} placement="bottomRight" overlayStyle={{position: "fixed"}}>
@@ -60,7 +63,6 @@ export class Header extends Component {
                     </Col>
                 </Row>
                 </Layout.Header>
-                <RequestLoading/>
             </React.Fragment>
         )
     }

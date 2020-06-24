@@ -44,7 +44,7 @@ export class Login extends Component {
         const {showLogin} = this.state;
         const {auth: {isLoggedIn}, history} = this.props;
         if(isLoggedIn){
-            let returnUrl = new URLSearchParams(get(history, 'location.pathname', ""));
+            let returnUrl = new URLSearchParams(get(history, 'location.search', ""));
             return <Redirect to={returnUrl.get('returnUrl') || '/'}/>;
         }
         return (

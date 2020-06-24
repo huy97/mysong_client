@@ -4,7 +4,7 @@ import { Drawer, Form, Input, Upload, Button, notification } from "antd";
 import { FiUpload } from "react-icons/fi";
 import { uploadMedia } from "services/media";
 import { updateCategory } from "services/category";
-import { getCDN } from "utils";
+import { getCDN, initFields } from "utils";
 
 export default class Edit extends Component {
     static propTypes = {
@@ -129,14 +129,11 @@ export default class Edit extends Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (snapshot.isEdit) {
-            let fields = [];
             let initData = {
                 title: snapshot.editData.title,
                 description: snapshot.editData.description,
             };
-            Object.keys(initData).map((key) => {
-                return fields.push({ name: [key], value: initData[key] });
-            });
+            let fields = initFields(initData);
             this.setState({
                 thumbnail: snapshot.editData.thumbnail,
                 thumbnailData: getCDN(snapshot.editData.thumbnail),
@@ -150,8 +147,7 @@ export default class Edit extends Component {
     getSnapshotBeforeUpdate = (prevProps) => {
         return {
             isEdit:
-                prevProps.editData !== this.props.editData &&
-                !!Object.keys(this.props.editData).length,
+                prevProps.editData !== this.props.editData && !!this.props.editData._id,
             editData: this.props.editData,
         };
     };

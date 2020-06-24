@@ -851,6 +851,8 @@ html,
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
+  margin: 0;
+  padding: 0;
 }
 
 // Start form
@@ -870,6 +872,11 @@ body {
     border: 0;
     color: #ffffff;
     background-color: #0190f3;
+  }
+  &-orange {
+    border: 0;
+    color: #ffffff;
+    background-color: #ffae00;
   }
   &-danger {
     border: 0;
@@ -924,11 +931,26 @@ body {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  &:focus{
+    border-color: #0190f3;
+  }
 }
 
 .error-message {
   padding: 5px 0;
   color: #ff0000;
+}
+
+.manager-logo{
+  width: 200px;
+  text-align: center;
+  span{
+      font-size: 31px;
+      font-weight: 800;
+      background: -webkit-linear-gradient(45deg, #314ff7, #b530cf 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
 }
 
 // End form
