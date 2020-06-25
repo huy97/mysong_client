@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './Header.module.scss';
 import { getCDN } from 'utils';
-import { FiLock, FiUser, FiSearch, FiBell } from 'react-icons/fi';
+import { FiLock, FiUser, FiSearch, FiBell, FiArrowUpLeft } from 'react-icons/fi';
 import { withRouter, Link } from 'react-router-dom';
 import { get } from 'lodash';
 import { RiVipCrownLine } from 'react-icons/ri';
@@ -25,7 +25,49 @@ export class Header extends Component {
                                 </span>
                             </div>
                             <div className={styles.searchBox_input}>
-                                <input type="text"/>
+                                <input type="text" placeholder="Nhập tên bài hát, ca sĩ..."/>
+                            </div>
+                            <div className={styles.searchBox_content}>
+                                <div className={styles.searchBox_content__item}>
+                                    <div className={styles.searchBox_content__item_title}>
+                                        <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, velit praesentium facilis libero voluptas error repudiandae doloribus debitis. Accusantium earum nulla est blanditiis libero nesciunt corporis deleniti, veritatis dignissimos quis?</b>
+                                    </div>
+                                    <div className={styles.searchBox_content__item_icon}>
+                                        <span>
+                                            <FiArrowUpLeft size={24}/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className={styles.searchBox_content__item}>
+                                    <div className={styles.searchBox_content__item_title}>
+                                        <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, velit praesentium facilis libero voluptas error repudiandae doloribus debitis. Accusantium earum nulla est blanditiis libero nesciunt corporis deleniti, veritatis dignissimos quis?</b>
+                                    </div>
+                                    <div className={styles.searchBox_content__item_icon}>
+                                        <span>
+                                            <FiArrowUpLeft size={24}/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className={styles.searchBox_content__item}>
+                                    <div className={styles.searchBox_content__item_title}>
+                                        <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, velit praesentium facilis libero voluptas error repudiandae doloribus debitis. Accusantium earum nulla est blanditiis libero nesciunt corporis deleniti, veritatis dignissimos quis?</b>
+                                    </div>
+                                    <div className={styles.searchBox_content__item_icon}>
+                                        <span>
+                                            <FiArrowUpLeft size={24}/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className={styles.searchBox_content__item}>
+                                    <div className={styles.searchBox_content__item_title}>
+                                        <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, velit praesentium facilis libero voluptas error repudiandae doloribus debitis. Accusantium earum nulla est blanditiis libero nesciunt corporis deleniti, veritatis dignissimos quis?</b>
+                                    </div>
+                                    <div className={styles.searchBox_content__item_icon}>
+                                        <span>
+                                            <FiArrowUpLeft size={24}/>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </nav>
@@ -41,14 +83,17 @@ export class Header extends Component {
                                     </div>
                                     : null
                                 }
-                                <div className={styles.menuItem}>
+                                <div className={styles.menu_item}>
                                     <div className={styles.avatar} style={{backgroundColor: '#ffffff'}}>
+                                        <div className={styles.badge}>
+                                            <span>100</span>
+                                        </div>
                                         <span>
                                             <FiBell size={24}/>
                                         </span>
                                     </div>
                                 </div>
-                                <div className={styles.menuItem}>
+                                <div className={styles.menu_item}>
                                     <div className={styles.avatar}>
                                         {auth.userInfo.info.avatar ? 
                                             <img src={getCDN(auth.userInfo.info.avatar)} alt="Avatar"/>

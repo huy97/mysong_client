@@ -10,6 +10,10 @@ const routes = [
     {
         path: "/video/:slug/:shortCode.html",
         component: Home
+    },
+    {
+        path: "/mv",
+        component: Home
     }
 ];
 

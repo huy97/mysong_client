@@ -6,6 +6,7 @@ import NotFound from 'containers/NotFound';
 import Layout from 'antd/lib/layout';
 import { get } from 'lodash';
 import RequestLoading from 'components/RequestLoading';
+import styles from './Content.module.scss';
 
 //Admin component
 const ManagerHeader = React.lazy(
@@ -80,7 +81,7 @@ export class Content extends Component {
                 <Header/>
                 <RequestLoading style={{top: 90}}/>
                 <Sidebar history={history}/>
-                <div className="wrapper">
+                <div className={styles.wrapper}>
                     {children}
                 </div>
             </div>

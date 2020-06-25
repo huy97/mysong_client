@@ -32,7 +32,7 @@ export class Sidebar extends Component {
                     selectedKeys={this.getSelectKey()}
                     mode="inline"
                     style={{
-                        height: '100%',
+                        minHeight: '100%',
                         borderRight: 0
                     }}>
                     {
