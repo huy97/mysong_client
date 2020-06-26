@@ -1,0 +1,129 @@
+.container{
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    .wrapper{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .item{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all .3s;
+            flex-shrink: 0;
+            &:hover{
+                .item_title{
+                    left: 0;
+                    opacity: 1;
+                }
+                .item_icon{
+                    left: 10px;
+                    opacity: 1;
+                }
+                .item_title, .item_icon, .item_over{
+                    visibility: visible;
+
+                }
+                .item_over{
+                    opacity: 0.3;
+                }
+            }
+            &_title{
+                position: absolute;
+                visibility: hidden;
+                top: 0;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                z-index: 3;
+                padding: 10px;
+                opacity: 0;
+                padding-right: 50px;
+                transition: all .3s;
+                h2{
+                    margin: 0;
+                    font-size: 32px;
+                    color: #ffffff;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                h4{
+                    margin: 0;
+                    font-size: 18px;
+                    color: #dddddd;
+                }
+            }
+            &_over{
+                position: absolute;
+                visibility: hidden;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                background-color: #000000;
+                opacity: 0;
+                transition: all .2s;
+            }
+            &_image{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                object-fit: cover;
+            }
+            &_icon{
+                position: absolute;
+                visibility: hidden;
+                color: #ffffff;
+                opacity: 0;
+                z-index: 3;
+                top: 50%;
+                left: 50%;
+                transform: translateY(-50%);
+                transition: all .3s;
+            }
+        }
+    }
+    .submenu{
+        position: absolute;
+        display: flex;
+        height: 50px;
+        right: 0;
+        bottom: 10px;
+        z-index: 5;
+        &_item{
+            width: 54px;
+            height: 54px;
+            margin: 0 5px;
+            padding: 2px;
+            cursor: pointer;
+            &:hover, &.submenu_active{
+                background: linear-gradient(45deg, #ffffff, #a5a5a5 80%);
+            }
+            img{
+                width: 50px;
+                height: 50px;
+                object-fit: fill;
+            }
+        }
+        &_next, &_prev{
+            height: 54px;
+            color: #ffffff;
+            cursor: pointer;
+            svg{
+                height: 54px;
+            }
+        }
+    }
+}

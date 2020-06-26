@@ -4,6 +4,7 @@ import {Layout, Avatar, Row, Col, Badge, Menu, Dropdown, Space} from 'antd';
 import 'antd/dist/antd.min.css';
 import { BellOutlined } from '@ant-design/icons';
 import { getCDN } from 'utils';
+import { Helmet } from 'react-helmet';
 
 export class Header extends Component {
 
@@ -23,6 +24,10 @@ export class Header extends Component {
             }} = this.props;
         return (
             <React.Fragment>
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>mySong - Best music for everybody | Admin Cpanel</title>
+                </Helmet>
                 <Layout.Header
                     style={{
                         position: "fixed",

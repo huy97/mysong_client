@@ -48,7 +48,7 @@ export class Login extends Component {
             return <Redirect to={returnUrl.get('returnUrl') || '/'}/>;
         }
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.container}>
                 <div className={styles.login}>
                     {
                         showLogin ?

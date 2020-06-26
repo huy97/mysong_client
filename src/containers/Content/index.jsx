@@ -81,8 +81,10 @@ export class Content extends Component {
                 <Header/>
                 <RequestLoading style={{top: 90}}/>
                 <Sidebar history={history}/>
-                <div className={styles.wrapper}>
-                    {children}
+                <div className={styles.container}>
+                    <div className={styles.wrapper}>
+                        {children}
+                    </div>
                 </div>
             </div>
         )

@@ -10,7 +10,7 @@ const NotFound = () => {
                 <meta charSet="utf-8" />
                 <title>404 Not Found</title>
             </Helmet>
-            <div className={styles.wrapper}>
+            <div className={styles.container}>
                 <h1>404</h1>
                 <h3>Opps. Trang bạn đang truy cập không tồn tại</h3>
                 <Link to={'/'}>

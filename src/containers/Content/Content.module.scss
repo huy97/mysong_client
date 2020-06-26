@@ -1,8 +1,14 @@
-.wrapper{
+.container{
     display: flex;
     min-height: 100vh;
     background-color: #f8f8f8;
     margin-left: 240px;
     padding: 10px;
     padding-top: 90px;
+    padding-bottom: 70px;
+    .wrapper{
+        display: flex;
+        width: 1024px;
+        margin: 0 auto;
+    }
 }

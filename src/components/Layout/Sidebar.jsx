@@ -18,7 +18,7 @@ export class Sidebar extends Component {
     
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.container}>
                 <div className={styles.menu}>
                     <div className={this.getActiveClass('/')}>
                         <div className={styles.menu_item_icon}>
