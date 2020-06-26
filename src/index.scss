@@ -868,6 +868,10 @@ body {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  &-sm{
+    height: 35px;
+    line-height: 35px;
+  }
   &-primary {
     border: 0;
     color: #ffffff;

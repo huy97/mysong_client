@@ -3,19 +3,9 @@ import { connect } from 'react-redux';
 import styles from './Sidebar.module.scss';
 import { RiHome2Line, RiAwardLine, RiMovie2Line, RiUserStarLine, RiStackLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import routes from 'routes/user';
 import { FiActivity } from 'react-icons/fi';
 
 export class Sidebar extends Component {
-    getSelectKey = () => {
-        const {history} = this.props;
-        let routeIndex = routes.findIndex(
-            (route) => route.path === history.location.pathname
-        );
-        if (routeIndex !== -1) 
-            return routeIndex.toString();
-        return "";
-    }
 
     getActiveClass = (path) => {
         let className = styles.menu_item;
@@ -42,7 +32,7 @@ export class Sidebar extends Component {
                             </span>
                         </Link>
                     </div>
-                    <div className={this.getActiveClass('/mv')}>
+                    <div className={this.getActiveClass('/moi-phat-hanh')}>
                         <div className={styles.menu_item_icon}>
                             <span>
                                 <FiActivity size={18}/>
@@ -54,7 +44,7 @@ export class Sidebar extends Component {
                             </span>
                         </Link>
                     </div>
-                    <div className={this.getActiveClass('/mv')}>
+                    <div className={this.getActiveClass('/top-100')}>
                         <div className={styles.menu_item_icon}>
                             <span>
                                 <RiAwardLine size={18}/>
@@ -78,25 +68,25 @@ export class Sidebar extends Component {
                             </span>
                         </Link>
                     </div>
-                    <div className={this.getActiveClass('/mv')}>
+                    <div className={this.getActiveClass('/the-loai')}>
                         <div className={styles.menu_item_icon}>
                             <span>
                                 <RiStackLine size={18}/>
                             </span>
                         </div>
-                        <Link to="/mv">
+                        <Link to="/the-loai">
                             <span>
                                 Thể loại
                             </span>
                         </Link>
                     </div>
-                    <div className={this.getActiveClass('/mv')}>
+                    <div className={this.getActiveClass('/nghe-si')}>
                         <div className={styles.menu_item_icon}>
                             <span>
                                 <RiUserStarLine size={18}/>
                             </span>
                         </div>
-                        <Link to="/mv">
+                        <Link to="/nghe-si">
                             <span>
                                 Ca sĩ
                             </span>

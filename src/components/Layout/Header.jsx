@@ -8,8 +8,17 @@ import { get } from 'lodash';
 import { RiVipCrownLine } from 'react-icons/ri';
 
 export class Header extends Component {
+    state = {
+        showSearchBox: false
+    }
+
+    handleInputSearchBoxFocusBlur = () => {
+        this.setState({showSearchBox: !this.state.showSearchBox});
+    }
+
     render() {
         const {auth, history} = this.props;
+        const {showSearchBox} = this.state;
         const returnUrl = get(history, 'location.pathname', "");
         return (
             <div className={styles.wrapper}>
@@ -25,9 +34,9 @@ export class Header extends Component {
                                 </span>
                             </div>
                             <div className={styles.searchBox_input}>
-                                <input type="text" placeholder="Nhập tên bài hát, ca sĩ..."/>
+                                <input type="text" placeholder="Nhập tên bài hát, ca sĩ..." onFocus={this.handleInputSearchBoxFocusBlur} onBlur={this.handleInputSearchBoxFocusBlur}/>
                             </div>
-                            <div className={styles.searchBox_content}>
+                            <div className={styles.searchBox_content} style={showSearchBox ? {visibility: 'visible', opacity: 1, top: 40} : {}}>
                                 <div className={styles.searchBox_content__item}>
                                     <div className={styles.searchBox_content__item_title}>
                                         <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, velit praesentium facilis libero voluptas error repudiandae doloribus debitis. Accusantium earum nulla est blanditiis libero nesciunt corporis deleniti, veritatis dignissimos quis?</b>

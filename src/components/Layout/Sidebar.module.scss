@@ -6,9 +6,9 @@
     background-color: #ffffff;
     overflow: hidden;
     overflow-y: auto;
+    z-index: 999;
     .menu{
-        padding: 5px;
-        padding-left: 0;
+        padding: 10px 10px 10px 0;
         &_item{
             display: flex;
             width: 100%;
