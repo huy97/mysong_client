@@ -21,6 +21,12 @@ export const SONG_STATUS = {
     PENDING: 2
 };
 
+export const REPEAT_TYPE = {
+    REPEAT_OFF: 0,
+    REPEAT_ONE: 1,
+    REPEAT_ALL: 2
+}
+
 export const API_URL = 'http://localhost:8686/api/v1';
 export const CDN_URL = 'http://localhost:8686/cdn/';
 export const LOGIN_URL = '/user/login';

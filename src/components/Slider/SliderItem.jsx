@@ -11,10 +11,12 @@ export default class SliderItem extends Component {
 
     componentDidMount = () => {
         const {item} = this.props;
-        let image = new Image(1024, 350);
+        let image = new Image();
         image.src = item.thumbnailMedium;
         image.onload = () => {
-            this.itemImage.src = image.src;
+            if(this.itemImage){
+                this.itemImage.src = image.src;
+            }
         }
     }
 
