@@ -6,6 +6,7 @@ import {FiLock, FiUser, FiSearch, FiBell, FiArrowUpLeft} from 'react-icons/fi';
 import {withRouter, Link} from 'react-router-dom';
 import {get} from 'lodash';
 import {RiVipCrownLine} from 'react-icons/ri';
+import Dropdown from 'components/Dropdown';
 
 export class Header extends Component {
     state = {
@@ -108,29 +109,33 @@ export class Header extends Component {
                                                 : null
                                         }
                                         <div className={styles.menu_item}>
-                                            <div
-                                                className={styles.avatar}
-                                                style={{
-                                                    backgroundColor: '#ffffff'
-                                                }}>
-                                                <div className={styles.badge}>
-                                                    <span>100</span>
+                                            <Dropdown content={<div>Không có thông báo</div>} placement="bottomright" style={{width: 200}}>
+                                                <div
+                                                    className={styles.avatar}
+                                                    style={{
+                                                        backgroundColor: '#ffffff'
+                                                    }}>
+                                                    <div className={styles.badge}>
+                                                        <span>100</span>
+                                                    </div>
+                                                    <span>
+                                                        <FiBell size={24}/>
+                                                    </span>
                                                 </div>
-                                                <span>
-                                                    <FiBell size={24}/>
-                                                </span>
-                                            </div>
+                                            </Dropdown>
                                         </div>
                                         <div className={styles.menu_item}>
-                                            <div className={styles.avatar}>
-                                                {
-                                                    auth.userInfo.info.avatar
-                                                        ? <img src={getCDN(auth.userInfo.info.avatar)} alt="Avatar"/>
-                                                        : <span>
-                                                                <FiUser size={24}/>
-                                                            </span>
-                                                }
-                                            </div>
+                                            <Dropdown content={<div>Không có thông báo</div>} placement="bottomright" style={{width: 200}}>
+                                                <div className={styles.avatar}>
+                                                    {
+                                                        auth.userInfo.info.avatar
+                                                            ? <img src={getCDN(auth.userInfo.info.avatar)} alt="Avatar"/>
+                                                            : <span>
+                                                                    <FiUser size={24}/>
+                                                                </span>
+                                                    }
+                                                </div>
+                                            </Dropdown>
                                         </div>
                                     </div>
                                 : <Link to={`/login?returnUrl=${returnUrl}`}>

@@ -6,7 +6,8 @@ import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 export default class Slider extends Component {
     static propTypes = {
-        items: PropTypes.array.isRequired
+        items: PropTypes.array.isRequired,
+        timing: PropTypes.number
     }
 
     static defaultProps = {
@@ -15,41 +16,49 @@ export default class Slider extends Component {
                 title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
                         "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
                 artistName: "Huy Le",
-                link: "https://picsum.photos/1024/350",
+                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
                 mvLink: "",
-                thumbnail: "https://picsum.photos/1024/350",
-                thumbnailMedium: "https://picsum.photos/1024/350"
+                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
+                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
             }, {
                 title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
                         "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
                 artistName: "Huy Le",
-                link: "https://picsum.photos/1024/350",
+                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
                 mvLink: "",
-                thumbnail: "https://picsum.photos/1024/350",
-                thumbnailMedium: "https://picsum.photos/1024/350"
+                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
+                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
             }, {
                 title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
                         "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
                 artistName: "Huy Le",
-                link: "https://picsum.photos/1024/350",
+                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
                 mvLink: "",
-                thumbnail: "https://picsum.photos/1024/350",
-                thumbnailMedium: "https://picsum.photos/1024/350"
+                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
+                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
             }, {
                 title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
                         "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
                 artistName: "Huy Le",
-                link: "https://picsum.photos/1024/350",
+                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
                 mvLink: "",
-                thumbnail: "https://picsum.photos/1024/350",
-                thumbnailMedium: "https://picsum.photos/1024/350"
+                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
+                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
             }
-        ]
+        ],
+        timing: 5000
     }
 
     state = {
         selectedKey: 0
     }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.handleNextPrev(1);
+        }, this.props.timing);
+    }
+    
 
     handleActiveSlide = (index) => {
         this.setState({selectedKey: index});
@@ -58,8 +67,8 @@ export default class Slider extends Component {
     handleNextPrev = (type) => {
         const {items} = this.props;
         let nextKey = this.state.selectedKey + type;
-        if(nextKey < 0) nextKey = 0;
-        if(nextKey === items.length) nextKey -= 1;
+        if(nextKey < 0) nextKey = items.length - 1;
+        if(nextKey === items.length) nextKey = 0;
         this.setState({selectedKey: nextKey});
     }
 

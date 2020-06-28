@@ -4,12 +4,13 @@ import styles from './Player.module.scss';
 import {RiPlayListLine} from 'react-icons/ri';
 import {REPEAT_TYPE} from 'constants/global';
 import Control from './Control';
-// import {getCDN} from 'utils';
+import Dropdown from 'components/Dropdown';
+import {getCDN} from 'utils';
 
 export class Player extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
             player: {
                 playing: false,
                 canPlay: false,
@@ -21,7 +22,6 @@ export class Player extends Component {
                 mute: false,
                 repeat: REPEAT_TYPE.REPEAT_OFF
             },
-            song: {},
             onMouseHold: false
         }
         this.audio = new Audio();
@@ -29,11 +29,9 @@ export class Player extends Component {
     }
 
     componentDidMount() {
-        let audio = 'http://mp3-s1-zmp3.zadn.vn/794df833e974002a5965/1153877562796251586?authen=exp' +
-                '=1593417431~acl=/794df833e974002a5965/*~hmac=81017a74023118edf018566b7b81cf32';
         document.addEventListener('mousemove', this.handleSeekingMouseMove);
         document.addEventListener('mouseup', this.handleSeekingMouseUp);
-        this.loadResource(audio);
+        this.loadResource("media_storage/files/1592754442884_73805609826359476519_nhac.mp3");
     }
 
     initPlayer = () => {
@@ -78,17 +76,17 @@ export class Player extends Component {
     }
 
     loadResource = (source) => {
+        if(!source) return;
         const {player} = this.state;
         player.canPlay = false;
-        this.audio.src = source;
-        this
-            .audio
-            .load();
+        this.audio.src = getCDN(source);
+        this.audio.load();
         this.setState({player});
     }
 
     handlePlayPause = () => {
         const {player} = this.state;
+        if(!player.canPlay) return;
         player.playing = !player.playing;
         if (player.playing) {
             this.audio.play();
@@ -127,8 +125,8 @@ export class Player extends Component {
     }
 
     handleSeekingMouseDown = (e) => {
-        const {player} = this.state;
-        if (!player.canPlay) 
+        const {player, onMouseHold} = this.state;
+        if (!player.canPlay && !onMouseHold) 
             return;
         this.setState({onMouseHold: true});
     }
@@ -245,12 +243,14 @@ export class Player extends Component {
                     </div>
                     <div className={styles.border}></div>
                     <div className={styles.btn_playlist}>
-                        <button className="btn btn-sm btn-primary">
-                            <span className="menu-icon">
-                                <RiPlayListLine size={18}/>
-                            </span>
-                            <span>Danh sách phát</span>
-                        </button>
+                        <Dropdown placement="top" content={<div style={{textAlign: "center"}}>Không có dữ liệu</div>}>
+                            <button className="btn btn-sm btn-primary">
+                                <span className="menu-icon">
+                                    <RiPlayListLine size={18}/>
+                                </span>
+                                <span>Danh sách phát</span>
+                            </button>
+                        </Dropdown>
                     </div>
                 </div>
             </div>

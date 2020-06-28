@@ -1,0 +1,94 @@
+.container{
+    position: relative;
+    z-index: 1010;
+    .trigger{
+        z-index: 1;
+    }
+    .menu{
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        padding: 10px;
+        min-width: 100%;
+        border-radius: 3px;
+        background-color: #fff;
+        box-shadow: rgba(0,0,0,.2) 0 0 5px 0;
+        transition: all .2s;
+        z-index: -1;
+        &_top{
+            margin-bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+        }
+        &_top_left{
+            margin-bottom: 5px;
+            bottom: 0;
+            left: 0;
+        }
+        &_top_right{
+            margin-bottom: 5px;
+            bottom: 0;
+            right: 0;
+        }
+        &_bottom{
+            margin-top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+        &_bottom_left{
+            margin-top: 5px;
+            top: 0;
+            left: 0;
+        }
+        &_bottom_right{
+            margin-top: 5px;
+            top: 0;
+            right: 0;
+        }
+        &_left{
+            margin-right: 5px;
+            right: 0;
+        }
+        &_right{
+            margin-left: 5px;
+            top: 100%;
+            left: 0;
+        }
+        &_active{
+            opacity: 1;
+            visibility: visible;
+            &.menu_top{
+                bottom: 100%;
+            }
+            &.menu_top_left{
+                bottom: 100%;
+                right: 0;
+            }
+            &.menu_top_right{
+                bottom: 100%;
+                right: 0;
+            }
+            &.menu_bottom{
+                top: 100%;
+            }
+            &.menu_bottom_left{
+                top: 100%;
+                right: 0;
+            }
+            &.menu_bottom_right{
+                top: 100%;
+                right: 0;
+            }
+            &.menu_left{
+                top: 0;
+                right: 100%;
+            }
+            &.menu_right{
+                top: 0;
+                left: 100%;
+            }
+        }
+    }
+}

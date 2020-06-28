@@ -2,10 +2,12 @@ import axios from 'axios';
 import {API_URL} from "constants/global";
 import store from "store";
 import {hideLoading, showLoading} from "react-redux-loading-bar";
+import queryString from 'querystring'
 
 const instance = axios.create({
     baseURL: API_URL,
-    // withCredentials: true,
+    withCredentials: true,
+    paramsSerializer: params => queryString.stringify(params),
     timeout: 30000
 });
 

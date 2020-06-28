@@ -57,6 +57,19 @@ export const prepareTime = (time) => {
     return time;
 }
 
+export const isChild = (parent, children) => {
+    let isChild = false;
+    let nextParent = children ? children.parentNode : null;
+    while(nextParent){
+        if(parent.contains(nextParent)){
+            isChild = true;
+            break;
+        }
+        nextParent = nextParent.parentNode;
+    }
+    return isChild;
+}
+
 export const toast = {
     error: (message, options) => {
         return cogoToast.error(message, {position: 'top-right', hideAfter: 5, ...options});

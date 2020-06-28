@@ -1,0 +1,18 @@
+.container{
+    position: relative;
+    display: inline-block;
+    z-index: 1010;
+    .content{
+        position: absolute;
+        visibility: hidden;
+        min-width: 200px;
+        height: 200px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 3px;
+        box-shadow: rgba(0,0,0,.2) 0 0 5px 0;
+        &_active{
+            visibility: visible;
+        }
+    }
+}
