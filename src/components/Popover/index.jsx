@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Popover.module.scss';
+import { isChild } from 'utils';
 
 export default class Popover extends Component {
     static propTypes = {
@@ -24,7 +25,6 @@ export default class Popover extends Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleVisibleMenu);
-        window.addEventListener('resize', this.handleCustomMenu);
 
         this.popoverContainer.oncontextmenu = (e) => {
             this.handleCustomMenu(e);
@@ -57,15 +57,14 @@ export default class Popover extends Component {
         this.setState({visible: true, position});
     }
 
-    handleVisibleMenu = () => {
-        if(this.state.visible){
+    handleVisibleMenu = (e) => {
+        if(this.state.visible && !isChild(this.popoverMain, e.target)){
             this.setState({visible: false});
         }
     }
 
     componentWillUnmount() {
         document.removeEventListener('click', this.handleVisibleMenu);
-        window.removeEventListener('resize', this.handleCustomMenu);
     }
     
 
@@ -73,7 +72,7 @@ export default class Popover extends Component {
         const {children, content, containerStyle} = this.props;
         const {visible, style, position} = this.state;
         return (
-            <div className={styles.container} style={containerStyle}>
+            <div className={styles.container} ref={el => this.popoverMain = el} style={containerStyle}>
                 <div ref={(el) => this.popoverContainer = el}>
                     {children}
                 </div>
