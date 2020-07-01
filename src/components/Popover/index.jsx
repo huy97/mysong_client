@@ -25,7 +25,6 @@ export default class Popover extends Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleVisibleMenu);
-
         this.popoverContainer.oncontextmenu = (e) => {
             this.handleCustomMenu(e);
             return false;
