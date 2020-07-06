@@ -39,27 +39,22 @@
         }
     }
     .swiper{
+        display: flex;
+        margin: 10px -9.5px;
+        overflow: hidden;
         &_wrapper{
             display: flex;
-            width: 100%;
-            padding: 10px 0;
-            overflow-x: hidden;
+            transition: all .2s;
             &_item{
                 position: relative;
-                width: 190px;
-                height: 190px;
+                width: 209px;
                 flex-shrink: 0;
                 border-radius: 3px;
-                margin-right: 19px;
-                background-color: #ffffff;
                 transition: all .5s;
+                padding: 0 9.5px;
                 &_thumbnail{
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: 1;
-                    width: 100%;
-                    height: 100%;
+                    width: 190px;
+                    height: 190px;
                     border-radius: 3px;
                     img{
                         width: 100%;
@@ -70,7 +65,7 @@
                 }
                 &:hover{
                     .swiper_wrapper_item_over{
-                        opacity: 0.3;
+                        opacity: 0.2;
                     }
                     .swiper_wrapper_item_over, .swiper_wrapper_item_title{
                         visibility: visible;
@@ -79,31 +74,37 @@
                         left: 0;
                         right: 0;
                     }
+                    .swiper_wrapper_item_title{
+                        opacity: 1;
+                    }
                 }
                 &_over{
                     position: absolute;
                     visibility: hidden;
-                    top: 50%;
-                    right: 50%;
-                    bottom: 50%;
-                    left: 50%;
-                    background-color: #000;
-                    opacity: 0;
+                    width: 190px;
+                    height: 190px;
+                    left: 0;
+                    top: 20%;
+                    background-color: #555555;
                     border-radius: 3px;
+                    margin: 0 9.5px;
                     z-index: 2;
-                    transition: all .1s;
+                    opacity: 0;
+                    transition: all .2s;
                 }
                 &_title{
                     position: absolute;
                     display: flex;
+                    width: 190px;
+                    height: 190px;
                     visibility: hidden;
-                    top: -50%;
+                    top: -20%;
                     left: 0;
-                    right: 0;
-                    bottom: 50%;
                     z-index: 3;
+                    margin: 0 9.5px;
                     padding: 5px;
                     color: #ffffff;
+                    opacity: 0;
                     cursor: pointer;
                     flex-direction: column;
                     align-items: center;

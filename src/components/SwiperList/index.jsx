@@ -7,7 +7,8 @@ import SwiperItem from './SwiperItem';
 export default class SwiperList extends Component {
     static propTypes = {
         title: PropTypes.string,
-        items: PropTypes.array
+        items: PropTypes.array,
+        
     }
 
     static defaultProps = {
@@ -74,33 +75,22 @@ export default class SwiperList extends Component {
         super(props);
         this.state = {
             selectedKey: 0,
-            totalPage: 0,
-            nextWidth: 0
+            translateWidth: 0
         }
-    }
-
-    componentDidMount() {
-        this.getTotalPage();
-    }
-    
-    getTotalPage = () => {
-        const { items } = this.props;
-        let totalPage = Math.floor(items.length / 5);
-        this.setState({totalPage});
     }
 
     handleNextPrev = (num) => {
-        let { selectedKey, totalPage } = this.state;
+        let { selectedKey, translateWidth } = this.state;
         selectedKey += num;
-        if(selectedKey < 0 || selectedKey > totalPage){
+        if(selectedKey < 0 || (num > 0 && this.swiperContainer.scrollWidth === this.swiperContainer.clientWidth)){
             return;
         }
-        let nextWidth = selectedKey * this.swiperWrapper.clientWidth + 19;
-        this.setState({selectedKey, nextWidth});
+        translateWidth += num * this.swiperContainer.clientWidth;
+        this.setState({selectedKey, translateWidth});
     }
 
     render() {
-        const { nextWidth } = this.state;
+        const { translateWidth, selectedKey } = this.state;
         const { title, items } = this.props
         return (
             <div className={styles.container}>
@@ -109,7 +99,7 @@ export default class SwiperList extends Component {
                         <h1>{title}</h1>
                     </div>
                     <div className={styles.right_action}>
-                        <button onClick={(e) => this.handleNextPrev(-1)}>
+                        <button disabled={selectedKey === 0} onClick={(e) => this.handleNextPrev(-1)}>
                             <FiChevronLeft strokeWidth={1.5} size={24}/>
                         </button>
                         <button onClick={(e) => this.handleNextPrev(1)}>
@@ -117,10 +107,10 @@ export default class SwiperList extends Component {
                         </button>
                     </div>
                 </div>
-                <div className={styles.swiper}>
-                    <div ref={(el) => this.swiperWrapper = el} className={styles.swiper_wrapper}>
+                <div ref={(el) => this.swiperContainer = el} className={styles.swiper}>
+                    <div className={styles.swiper_wrapper} style={{transform: `translate(-${translateWidth}px)`}}>
                         {items.map((item, key) => (
-                            <SwiperItem ref={el => this.swiperItem = el} key={key} item={item} style={{transform: `translate(-${nextWidth}px)`}}/>
+                            <SwiperItem key={key} item={item}/>
                         ))}
                     </div>
                 </div>

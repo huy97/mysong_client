@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Popover.module.scss';
-import { isChild } from 'utils';
+// import { isChild } from 'utils';
 
 export default class Popover extends Component {
     static propTypes = {
@@ -26,6 +26,8 @@ export default class Popover extends Component {
     componentDidMount() {
         document.addEventListener('click', this.handleVisibleMenu);
         this.popoverContainer.oncontextmenu = (e) => {
+            let event = new Event('click');
+            document.dispatchEvent(event);
             this.handleCustomMenu(e);
             return false;
         }
@@ -35,29 +37,21 @@ export default class Popover extends Component {
         let wHeight = window.innerHeight;
         let wWidth = window.innerWidth;
         let position = {};
-        if(wHeight - e.clientY > this.poperContentMenu.clientHeight){
-            position.top = e.offsetY;
+        if(wHeight - e.clientY < this.poperContentMenu.clientHeight){
+            position.bottom = wHeight - e.clientY;
         }else{
-            if(e.clientY > this.poperContentMenu.clientHeight){
-                position.bottom = this.popoverContainer.clientHeight - e.offsetY;
-            }else{
-                position.top = e.offsetY;
-            }
+            position.top = e.clientY;
         }
-        if(wWidth - e.clientX > this.poperContentMenu.clientWidth){
-            position.left = e.offsetX;
+        if(wWidth - e.clientX < this.poperContentMenu.clientWidth){
+            position.right = wWidth - e.clientX;
         }else{
-            if(e.clientX > this.poperContentMenu.clientWidth){
-                position.right = this.popoverContainer.clientWidth - e.offsetX;
-            }else{
-                position.left = e.offsetX;
-            }
+            position.left = e.clientX;
         }
         this.setState({visible: true, position});
     }
 
     handleVisibleMenu = (e) => {
-        if(this.state.visible && !isChild(this.popoverMain, e.target)){
+        if(this.state.visible){
             this.setState({visible: false});
         }
     }
@@ -71,7 +65,7 @@ export default class Popover extends Component {
         const {children, content, containerStyle} = this.props;
         const {visible, style, position} = this.state;
         return (
-            <div className={styles.container} ref={el => this.popoverMain = el} style={containerStyle}>
+            <div className={styles.container} style={containerStyle}>
                 <div ref={(el) => this.popoverContainer = el}>
                     {children}
                 </div>

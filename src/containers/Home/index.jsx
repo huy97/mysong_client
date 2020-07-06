@@ -4,6 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Slider from 'components/Slider';
 import SwiperList from 'components/SwiperList';
+import List from 'components/List';
+import ListItem from 'components/List/ListItem';
+import Popover from 'components/Popover';
 
 export class Home extends Component {
     
@@ -17,6 +20,17 @@ export class Home extends Component {
                 <div style={{width: '100%'}}>
                     <Slider/>
                     <SwiperList title="MỚI PHÁT HÀNH"/>
+                    <List>
+                        <ListItem render={(item) => {
+                            return (
+                                <Popover content={<div>Hi</div>}>
+                                    <div className="list-song">
+                                        {item.thumbnail}
+                                    </div>
+                                </Popover>
+                            )
+                        }}/>
+                    </List>
                 </div>
             </React.Fragment>
         )
