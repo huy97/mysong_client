@@ -20,7 +20,7 @@ export class Home extends Component {
                 <div style={{width: '100%'}}>
                     <Slider/>
                     <SwiperList title="MỚI PHÁT HÀNH"/>
-                    <List>
+                    <List grid={3}>
                         <ListItem render={(item) => {
                             return (
                                 <Popover content={<div>Hi</div>}>

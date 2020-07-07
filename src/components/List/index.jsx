@@ -4,7 +4,8 @@ import styles from './List.module.scss';
 
 export default class List extends Component {
     static propTypes = {
-        items: PropTypes.array
+        items: PropTypes.array,
+        grid: PropTypes.number
     }
 
     static defaultProps = {
@@ -37,10 +38,10 @@ export default class List extends Component {
     }
 
     render() {
-        const {children, items} = this.props;
+        const {children, items, grid} = this.props;
         return (
             <div className={styles.container}>
-                {items.map((item, key) => isValidElement(children) ? cloneElement(children, {key, item}) : children)}
+                {items.map((item, key) => isValidElement(children) ? cloneElement(children, {key, item, grid}) : children)}
             </div>
         )
     }

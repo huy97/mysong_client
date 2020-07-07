@@ -63,11 +63,6 @@ export default class SwiperList extends Component {
                 artistName: "Huy Huy",
                 thumbnail: "https://picsum.photos/200/200"
             },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
         ]
     }
 
@@ -89,6 +84,11 @@ export default class SwiperList extends Component {
         this.setState({selectedKey, translateWidth});
     }
 
+    disabledNextButton = () => {
+        const { translateWidth } = this.state;
+        return (this.swiperWrapper && this.swiperContainer && (this.swiperWrapper.clientWidth === 0 || this.swiperWrapper.clientWidth - translateWidth <= this.swiperContainer.clientWidth));
+    }
+
     render() {
         const { translateWidth, selectedKey } = this.state;
         const { title, items } = this.props
@@ -102,13 +102,13 @@ export default class SwiperList extends Component {
                         <button disabled={selectedKey === 0} onClick={(e) => this.handleNextPrev(-1)}>
                             <FiChevronLeft strokeWidth={1.5} size={24}/>
                         </button>
-                        <button onClick={(e) => this.handleNextPrev(1)}>
+                        <button disabled={this.disabledNextButton()} onClick={(e) => this.handleNextPrev(1)}>
                             <FiChevronRight strokeWidth={1.5} size={24}/>
                         </button>
                     </div>
                 </div>
                 <div ref={(el) => this.swiperContainer = el} className={styles.swiper}>
-                    <div className={styles.swiper_wrapper} style={{transform: `translate(-${translateWidth}px)`}}>
+                    <div ref={el => this.swiperWrapper = el} className={styles.swiper_wrapper} style={{transform: `translate(-${translateWidth}px)`}}>
                         {items.map((item, key) => (
                             <SwiperItem key={key} item={item}/>
                         ))}
