@@ -11,28 +11,64 @@ export default class List extends Component {
     static defaultProps = {
         items: [
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
             {
-                title: "Em không sai, chúng ta sai",
-                thumbnail: "https://picsum.photos/50/50"
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
+            },
+            {
+                title: "Em không sai, chúng ta sai, Em không sai, chúng ta sai",
+                thumbnail: "https://picsum.photos/150/150",
+                artistName: "Huy Le"
             },
         ]
     }

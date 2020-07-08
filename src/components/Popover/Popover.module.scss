@@ -1,6 +1,7 @@
 .container{
+    position: relative;
     .content{
-        position: fixed;
+        position: absolute;
         visibility: hidden;
         min-width: 200px;
         height: 200px;
