@@ -918,7 +918,7 @@ body {
   &-icon{
     display: inline-block;
     line-height: 0;
-    vertical-align: -0.2rem;
+    vertical-align: -0.125rem;
   }
   &-icon + span{
     display: inline-block;
@@ -986,11 +986,24 @@ body {
 @import "./assets/scss/list_song.scss";
 @import "./assets/scss/list_artist.scss";
 
+.list-action{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  &_item{
+    padding: 10px;
+    white-space: nowrap;
+    &:hover{
+      background-color: #f8f8f8;
+    }
+  }
+}
+
 //end import
 .menu-icon{
   font-size: 18px;
   margin-right: 5px;
-  vertical-align: -0.25rem;
+  vertical-align: -0.2rem;
 }
 
 .text-right{

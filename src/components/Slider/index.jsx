@@ -5,6 +5,12 @@ import SliderItem from './SliderItem';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 export default class Slider extends Component {
+
+    constructor(props){
+        super(props);
+        this.timing = null;
+    }
+
     static propTypes = {
         items: PropTypes.array.isRequired,
         timing: PropTypes.number
@@ -54,13 +60,18 @@ export default class Slider extends Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
+        this.handleAutoTiming();
+    }
+    
+    handleAutoTiming = () => {
+        clearInterval(this.timing);
+        this.timing = setInterval(() => {
             this.handleNextPrev(1);
         }, this.props.timing);
     }
-    
 
     handleActiveSlide = (index) => {
+        this.handleAutoTiming();
         this.setState({selectedKey: index});
     }
 
@@ -69,7 +80,7 @@ export default class Slider extends Component {
         let nextKey = this.state.selectedKey + type;
         if(nextKey < 0) nextKey = items.length - 1;
         if(nextKey === items.length) nextKey = 0;
-        this.setState({selectedKey: nextKey});
+        this.handleActiveSlide(nextKey);
     }
 
     render() {

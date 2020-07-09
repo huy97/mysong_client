@@ -33,6 +33,12 @@ export default class Popover extends Component {
     componentDidMount() {
         const { mouse } = this.props;
         document.addEventListener('click', this.handleVisibleMenu);
+        document.addEventListener('contextmenu', this.handleVisibleMenu);
+        window.addEventListener('scroll', (e) => {
+            if(this.state.visible){
+                console.log(this.poperContentMenu)
+            }
+        });
         if(mouse === "left"){
             this.popoverContainer.addEventListener('click', this.handleCustomMenu);
         }else{
@@ -48,14 +54,13 @@ export default class Popover extends Component {
     handleCustomMenu = (e) => {
         let wHeight = window.innerHeight;
         let wWidth = window.innerWidth;
-        console.log();
         let position = {};
         if(wHeight - e.clientY <= this.poperContentMenu.clientHeight){
             position.bottom = this.popoverContainer.clientHeight - e.layerY;
         }else{
             position.top = e.layerY;
         }
-        if(wWidth - e.clientX <= this.poperContentMenu.clientHeight){
+        if(wWidth - e.clientX <= this.poperContentMenu.clientWidth){
             position.right = this.popoverContainer.clientWidth - e.layerX;
         }else{
             position.left = e.layerX;
@@ -75,13 +80,14 @@ export default class Popover extends Component {
 
     componentWillUnmount() {
         document.removeEventListener('click', this.handleVisibleMenu);
+        document.removeEventListener('contextmenu', this.handleVisibleMenu);
         this.popoverContainer.removeEventListener('click', this.handleCustomMenu);
     }
     
 
     render() {
-        const {children, content, containerStyle} = this.props;
-        const {visible, style, position} = this.state;
+        const {children, content, style, containerStyle} = this.props;
+        const {visible, position} = this.state;
         return (
             <div className={styles.container} style={containerStyle}>
                 <div ref={(el) => this.popoverContainer = el}>

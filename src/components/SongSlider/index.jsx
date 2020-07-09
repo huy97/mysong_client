@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './SwiperList.module.scss';
+import styles from './SongSlider.module.scss';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
-import SwiperItem from './SwiperItem';
+import SongSliderItem from './SongSliderItem';
 
-export default class SwiperList extends Component {
+export default class SongSlider extends Component {
     static propTypes = {
         title: PropTypes.string,
         items: PropTypes.array,
@@ -110,7 +110,7 @@ export default class SwiperList extends Component {
                 <div ref={(el) => this.swiperContainer = el} className={styles.swiper}>
                     <div ref={el => this.swiperWrapper = el} className={styles.swiper_wrapper} style={{transform: `translate(-${translateWidth}px)`}}>
                         {items.map((item, key) => (
-                            <SwiperItem key={key} item={item}/>
+                            <SongSliderItem key={key} item={item}/>
                         ))}
                     </div>
                 </div>

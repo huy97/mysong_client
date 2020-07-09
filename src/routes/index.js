@@ -5,24 +5,24 @@ import userRoutes from 'routes/user';
 
 const Home = React.lazy(() => import('containers/Home'));
 const Login = React.lazy(() => import('containers/Login'));
-const Content = React.lazy(() => import('containers/Content'));
+const Container = React.lazy(() => import('containers'));
 const NotFound = React.lazy(() => import('containers/NotFound'));
 
 const RouterManager = (props) => {
     return (
         <Switch>
             <Route exact path="/">
-                <Content>
+                <Container>
                     <Home/>
-                </Content>
+                </Container>
             </Route>
             {
                 [...adminRoutes, ...userRoutes].map(({component: Component, isPrivate, roles, path, isAdmin}, key) => {
                     return (
                         <Route key={key} exact path={path}>
-                            <Content isPrivate={isPrivate} isAdmin={isAdmin} roles={roles}>
+                            <Container isPrivate={isPrivate} isAdmin={isAdmin} roles={roles}>
                                 <Component/>
-                            </Content>
+                            </Container>
                         </Route>
                     )
                 })

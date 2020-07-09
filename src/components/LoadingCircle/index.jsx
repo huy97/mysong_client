@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-export class RequestLoading extends Component {
+export class LoadingCircle extends Component {
     render() {
         const {loadingBar, style} = this.props;
         if(loadingBar.default)
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => ({
     loadingBar: state.loadingBar
 });
 
-export default connect(mapStateToProps)(RequestLoading);
+export default connect(mapStateToProps)(LoadingCircle);

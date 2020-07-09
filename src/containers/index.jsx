@@ -5,8 +5,8 @@ import {getUserToken, checkRole} from 'utils';
 import NotFound from 'containers/NotFound';
 import Layout from 'antd/lib/layout';
 import { get } from 'lodash';
-import RequestLoading from 'components/RequestLoading';
-import styles from './Content.module.scss';
+import LoadingCircle from 'components/LoadingCircle';
+import styles from './Container.module.scss';
 
 //Admin component
 const ManagerHeader = React.lazy(
@@ -26,8 +26,9 @@ const Sidebar = React.lazy(
 const Header = React.lazy(
     () => import ('components/Layout/Header')
 );
+//End
 
-export class Content extends Component {
+export class Container extends Component {
     render() {
         const token = getUserToken();
         const {
@@ -54,7 +55,7 @@ export class Content extends Component {
                         <ManagerSidebar history={history}/>
                         <Layout>
                             <ManagerHeader/>
-                            <RequestLoading/>
+                            <LoadingCircle/>
                             <Layout
                                 style={{
                                     backgroundColor: '#f8f8f8',
@@ -79,7 +80,7 @@ export class Content extends Component {
         return (
             <div>
                 <Header/>
-                <RequestLoading style={{top: 90}}/>
+                <LoadingCircle style={{top: 90}}/>
                 <Sidebar history={history}/>
                 <div className={styles.container}>
                     <div className={styles.wrapper}>
@@ -93,4 +94,4 @@ export class Content extends Component {
 
 const mapStateToProps = (state) => ({auth: state.authReducer});
 
-export default withRouter(connect(mapStateToProps)(Content));
+export default withRouter(connect(mapStateToProps)(Container));

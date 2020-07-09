@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './SwiperList.module.scss';
+import styles from './SongSlider.module.scss';
 import { FiPlay } from 'react-icons/fi';
 import noImage from 'assets/190x190.png';
 
-export class SwiperItem extends Component {
+export class SongSliderItem extends Component {
     static propTypes = {
         item: PropTypes.object,
     }
@@ -43,4 +43,4 @@ export class SwiperItem extends Component {
     }
 }
 
-export default React.forwardRef((props, ref) => <SwiperItem innerRef={ref} {...props}/>);
+export default React.forwardRef((props, ref) => <SongSliderItem innerRef={ref} {...props}/>);
