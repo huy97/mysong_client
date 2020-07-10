@@ -872,6 +872,11 @@ body {
     height: 35px;
     line-height: 35px;
   }
+  &-default{
+    border: 0;
+    background-color: #dddddd;
+  }
+
   &-primary {
     border: 0;
     color: #ffffff;
@@ -924,6 +929,20 @@ body {
     display: inline-block;
     margin-left: 5px;
   }
+}
+
+.d-block{
+  display: block;
+}
+.d-flex{
+  display: flex;
+}
+.d-inline{
+  display: inline;
+}
+
+.d-iblock{
+  display: inline-block;
 }
 
 .form-input {
@@ -985,6 +1004,7 @@ body {
 //Import
 @import "./assets/scss/list_song.scss";
 @import "./assets/scss/list_artist.scss";
+@import "./assets/scss/list_category.scss";
 
 .list-action{
   margin: 0;
@@ -994,7 +1014,7 @@ body {
     padding: 10px;
     white-space: nowrap;
     &:hover{
-      background-color: #f8f8f8;
+      background-color: #e8f0fe;
     }
   }
 }

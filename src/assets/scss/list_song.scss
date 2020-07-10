@@ -6,8 +6,24 @@
     margin-bottom: 10px;
     border-radius: 3px;
     cursor: pointer;
-    &:hover, &.active{
+    &:hover, &.show_popup{
         background-color: #1967d2;
+        .list-song{
+            &_thumb{
+                &_hover, &_icon{
+                    display: block;
+                }
+            }
+            &_info{
+                a{
+                    color: #ffffff;
+                }
+                color: #ffffff;
+            }
+        }
+    }
+    &.show_play{
+        background: linear-gradient(45deg, #314ff7, #b530cf 80%);
         .list-song{
             &_thumb{
                 &_hover, &_icon{
@@ -107,7 +123,7 @@
                 height: 100%;
             }
         }
-        &_detail{
+        &-detail{
             display: flex;
             margin-bottom: 10px;
             .thumb{
@@ -140,6 +156,31 @@
                     div{
                         margin-right: 10px;
                     }
+                }
+            }
+        }
+        &-block{
+            margin: 5px 0;
+            display: flex;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            justify-content: center;
+            &__link{
+                display: flex;
+                flex: 1;
+                flex-flow: column wrap;
+                justify-content: center;
+                align-items: center;
+                padding: 5px;
+                border-radius: 4px;
+                span{
+                    font-size: 12px;
+                }
+                svg{
+                    margin-bottom: 5px;
+                }
+                &:hover{
+                    background-color: #dddddd;
                 }
             }
         }

@@ -12,58 +12,7 @@ export default class SongSlider extends Component {
     }
 
     static defaultProps = {
-        items: [
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-            {
-                title: "Em Không Sai, Chúng Ta Sai",
-                artistName: "Huy Huy",
-                thumbnail: "https://picsum.photos/200/200"
-            },
-        ]
+        items: []
     }
 
     constructor(props) {

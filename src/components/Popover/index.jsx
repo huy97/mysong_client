@@ -34,11 +34,6 @@ export default class Popover extends Component {
         const { mouse } = this.props;
         document.addEventListener('click', this.handleVisibleMenu);
         document.addEventListener('contextmenu', this.handleVisibleMenu);
-        window.addEventListener('scroll', (e) => {
-            if(this.state.visible){
-                console.log(this.poperContentMenu)
-            }
-        });
         if(mouse === "left"){
             this.popoverContainer.addEventListener('click', this.handleCustomMenu);
         }else{
@@ -71,7 +66,7 @@ export default class Popover extends Component {
 
     handleVisibleMenu = (e) => {
         if(this.state.visible){
-            if(!isChild(this.popoverContainer, e.target)){
+            if(!isChild(this.popoverContainer, e.target) && !isChild(this.poperContentMenu, e.target)){
                 this.props.onHide(e);
                 this.setState({visible: false});
             }

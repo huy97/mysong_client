@@ -17,41 +17,7 @@ export default class Slider extends Component {
     }
 
     static defaultProps = {
-        items: [
-            {
-                title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
-                        "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
-                artistName: "Huy Le",
-                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                mvLink: "",
-                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
-            }, {
-                title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
-                        "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
-                artistName: "Huy Le",
-                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                mvLink: "",
-                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
-            }, {
-                title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
-                        "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
-                artistName: "Huy Le",
-                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                mvLink: "",
-                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
-            }, {
-                title: "Em Không Sai, Chúng Ta Sai, fhwehfq hfguwehfweiu wfwehfwehfiwehfiwe wfhweghfwe" +
-                        "i whfgewfhewhf qwfwehfewhfwehfiwue qfqhfqh",
-                artistName: "Huy Le",
-                link: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                mvLink: "",
-                thumbnail: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc",
-                thumbnailMedium: "https://i.picsum.photos/id/443/1024/350.jpg?hmac=hD3g1T8M6frFTbbQv5s8IYsmpCBwBZaV8B2f6oVbycc"
-            }
-        ],
+        items: [],
         timing: 5000
     }
 
